@@ -3,30 +3,134 @@
 % !TEX root = ../tesi.tex
 
 %**************************************************************
-\chapter{Descrizione dello stage}
-\label{cap:capitolo3}
+\chapter{Contesto}
+\label{cap:contesto}
 %**************************************************************
 
-\intro{Breve introduzione al capitolo}\\
+%\intro{}\\
+Questo capitolo è dedicato all'introduzione delle nozioni emerse dalla fase di apprendimento svolta durante il tirocinio, riguardanti nello specifico le varie di tipologie di DB NoSQL esistenti.\\
 
 %**************************************************************
-\section{Introduzione al progetto}
-
-%**************************************************************
-\section{Analisi preventiva dei rischi}
-
-Durante la fase di analisi iniziale sono stati individuati alcuni possibili rischi a cui si potrà andare incontro.
-Si è quindi proceduto a elaborare delle possibili soluzioni per far fronte a tali rischi.\\
-
-\begin{risk}{Performance del simulatore hardware}
-    \riskdescription{le performance del simulatore hardware e la comunicazione con questo potrebbero risultare lenti o non abbastanza buoni da causare il fallimento dei test}
-    \risksolution{coinvolgimento del responsabile a capo del progetto relativo il simulatore hardware}
-    \label{risk:hardware-simulator} 
-\end{risk}
-
-%**************************************************************
-\section{Requisiti e obiettivi}
+\section{Cosa significa NoSQL}
+Quando si parla di database NoSQL si intendono tutte quelle tecnologie di persistenza di dati che non prevedono strettamente l'utilizzo del paradigma SQL. L'acronimo significa infatti Not-only Structured Query language.\\
+Tuttavia, mentre le tecnologie classiche che rientrano sotto l'ombrello dei RDBMS (relational database management systems) sono in qualche modo uniformate dalla "lingua franca" che condividono (SQL), le implementazioni che ricadono nel paradigma NoSQL sono estremamente varie nell'effettivo modo in cui gestiscono i dati, e di conseguenza nei linguaggi che adottano.\\
+Questo può rendere il processo di selezione più complesso, ma fornisce anche un'ampia gamma di opzioni che, se scelte con cognizione di causa, possono portare a soluzioni estremamente specializzate ed efficaci.\\
 
 
 %**************************************************************
-\section{Pianificazione}
+\section{Idee e Implementazioni}
+Vengono di seguito elencati i vari sottogruppi che possiamo individuare all'interno del panorama NoSQL.\\
+
+\subsection{Key-Value Store}
+Questa categoria di DB rappresenta in realtà un modo per immagazzinare informazioni, basato sulla strutturazione dei dati in coppie "chiave-valore".\\
+Tutte le operazioni effettuate su un DB di questo tipo si basano quindi sulla chiave per recuperare il suo valore associato. Nella sua forma più semplcie, un key-value store funziona esattamente come un dizionario.\\
+
+\noindent Come esempio abbiamo il caso di Redis.\\
+Nasce inizialmente come DB appartenente al paradigma "key-value", composto quindi da un set di chiavi a cui sono legati dei valori, contenuto per intero nella memoria RAM.\\
+L'idea era di avere una sorta di cache in cui salvare dei dati frequentemente utilizzati per poterli recuperare molto velocemente.\\
+Se inizialmente veniva utilizzato a supporto di altri DB, nel tempo Redis è stato ampliato fino a diventare una soluzione unica (Redis Stack), in grado grazie ai suoi moduli di effettuare ricerche fulltext, visualizzare le informazioni in grafi ed implementare il salvataggio di documenti in formato JSON su memoria persistente in un database distribuito.\\
+Il potere di questa soluzione sta nell'avere tutte queste funzionalità all'interno dello stesso prodotto, garantendo una semplificazione non indifferente del processo di integrazione.
+
+
+\subsection{Wide Column Store}
+Questo tipo di database NoSQL estende il concetto di "key-value", dove le informazioni sono raccolte in colonne, le colonne in righe, le righe in tabelle e quest'ultime sono raccolte sotto un cosiddetto "keyspace". A differenza dei database relazionali classici, questo tipo di soluzione non necessita di uno schema, la struttura che definisce il contenuto di una tabella nei RDBMS. Questo permette ai Wide Column DB di accettare dati non strutturati, diventando quindi molto più flessibile.\\
+Un'altra importante differenza è che questo tipo di DB è decentralizzato e può essere scalato a dimensioni considerevoli senza troppi problemi, grazie al modo in cui è strutturato.\\
+
+\noindent Prendiamo come esempio cardine il DB Cassandra, che è un database NoSQL distribuito, decentralizzato, scalabile e ad "alta disponibilità". Questo significa che può essere fatto operare su macchine diverse per spezzare il carico, ma soprattutto che non segue il paradigma master-slave. In questo modo tutti i nodi (client) sono omogenei e hanno gli stessi privilegi. La decentralizzazione permette di garantire la disponibilità del sistema, ad esempio quando uno o più nodi dovessero essere irraggiungibili o non responsivi.\\
+Si parla poi di scalabilità per gli stessi motivi, poiché aggiungere nodi alla rete e ridistribuire il carico è estremamente facile.\\
+Cassandra sfrutta inoltre un linguaggio proprietario simile a SQL, denominato CQL, che risulta quindi facilmente comprensibile se si è abituati a lavorare con DB relazionali.\\
+
+\noindent Questo tipo di DB viene utilizzato quando la disponibilità dei dati 24/7 è una priorità, specialmente se tali dati sono in costante crescita, e la loro struttura tende a cambiare. Il costo da pagare come tradeoff per le potenzialità elencate è una minore consistency dei dati, ma l'argomento verrà approfondito nella \autoref{sec:cap-theorem-integrazione}.
+
+\subsection{Document Store}
+Questo paradigma racchiude probabilmente la famiglia più ampia e utilizzata di database NoSQL, presentando comunque soluzioni diverse al suo interno.\\
+L'idea principale è sempre quella di non fare uso di uno schema per strutturare i propri dati. Al posto di avere righe in una tabella, in questi DB si usano documents raggruppati in collections. I documenti non seguono una struttura uniforme all'interno della stessa collezione, e sono quasi sempre salvati in formato JSON o simili.\\
+In questo tipo di struttura la lettura dei dati è più rapida, a discapito di scrittura e update.\\
+Generalmente sono di facile utilizzo e sono tra i DB NoSQL più versatili.\\
+
+\noindent Prenderemo come esempio MongoDB e CouchDB.\\
+MongoDB è uno dei DB NoSQL più popolari e diffusi, sfrutta documenti e collezioni, salva i propri dati in formato BSON (Binary-JSON), e adotta il paradigma master-slave.\\
+Funziona molto bene quando la funzione principale di cui si ha bisogno è il salvataggio di grosse moli di dati, mentre è meno performante se questi dati devono essere prelevati e rielaborati, specialmente quando è necessario unire dati provenienti da documenti o collezioni diverse.\\
+CouchDB è piuttosto simile, sebbene sia un progetto meno popolare. Differisce da Mongo per come salva i documenti (direttamente in formato JSON) e per l'architettura di base, che si distanzia dal paradigma master-slave e sfrutta nodi multipli per mantenere le informazioni sempre disponibili, a discapito della loro consistenza.\\
+
+\subsection{Graph Database}
+%Nel panorama dei DB più specializzati annoveriamo quelli basati sui grafi.\\
+Esistono alcune categorie di DB all'interno del panorama NoSQL che sono state sviluppate soddisfare necessità specifiche. Una di queste categorie è quella dei DB basati sui grafi.\\
+Se nei RDBMS le relazioni sono sfruttate per collegare le tabelle, nel caso dei grafi le relazioni diventano vere e proprie entità, al pari dei nodi che esse collegano.\\
+Questo consente di recuperare i dati con richieste (query) più concise e leggibili, oltre che ridurre i tempi di attesa.\\
+Questo tipo di DB funziona al meglio in situazioni dove le query si basano molto sulle relazioni tra i dati, dove un DB relazionale dovrebbe operare molte operazioni di Join che aumentano notevolmente il tempo di elaborazione.\\
+
+\noindent Un esempio di DB in questa categoria è Neo4j.\\
+Come i DB relazionali, Neo4j è "ACID compliant", ovvero rispetta i parametri di atomicità, consistenza, isolazione e durabilità. Non è tuttavia un database distribuito e soffre quindi quando si parla di scalabilità.\\
+Sfrutta un linguaggio molto intuitivo e simile a SQL per le query, chiamato cypher.\\
+
+\noindent Come già detto, questo tipo di soluzione è utile in determinati campi e risulta molto interessante, ma può risultare inutile, o addirittura un ostacolo, se utilizzata in casi in cui non è necessaria.
+
+\subsection{Search Engine}
+Un'altra soluzione interessante, ma altrettanto specifica, è quella dei cosiddetti "full-text search engine". Questo tipo di database è piuttosto simile, in superficie, a quelli basati sui documenti, con la differenza che il search engine analizza i contenuti del database e ne fornisce un indice. In questo modo la ricerca di dati, che ovviamente sfrutta tale indice, risulta estremamente rapida anche su dataset molto grandi, con la possibilità di implementare anche vari filtri per migliorare la user experience.\\
+
+\noindent L'esempio più classico di implementazione di questo tipo di tecnologia è Elasticsearch, che è inizialmente nato come search engine e si è successivamente espanso per fornire le funzionalità classiche di un normale database.
+
+
+%**************************************************************
+\section{CAP Theorem, Facilità di Integrazione}
+\label{sec:cap-theorem-integrazione}
+
+\subsection{Un altro modo per categorizzare diversi sistemi di archiviazione}
+Nel tentativo di categorizzare i DB distribuiti, siano essi relazionali o meno, si sfrutta spesso il cosiddetto CAP Theorem, secondo cui un database distribuito può fornire soltanto due delle seguenti tre garanzie:
+\begin{itemize}
+    \item \textbf{Consistency}: i dati sono sempre coerenti all'interno dei vari nodi distribuiti;
+    \item \textbf{Availability}: i dati sono sempre disponibili in ogni momento;
+    \item \textbf{Partition Tolerance}: i dati sono disponibili anche se partizionati, ovvero separati "orizzontalmente" su nodi diversi.
+\end{itemize}
+
+\vspace{10pt}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[height=8cm]{cap-theorem}
+\end{center}
+\end{figure}
+\vspace{10pt} 
+
+\noindent Mentre le soluzioni classiche (DB relazionali) garantiscono Consistenza e Disponibilità, ma hanno grossi problemi con la scalabilità orizzontale e la separazione dei dati in cluster diversi, le soluzioni NoSQL tendenzialmente garantiscono il Partizionamento, e possono quindi soddisfare soltanto una delle altre due caratteristiche.\\
+
+\noindent In base quindi alle necessità di Ifin Sistemi, sarà necessario valutare quale tipo di database adottare anche in base al CAP theorem.
+
+\subsection{Integrazione}
+Tenendo in considerazione che lo scopo della ricerca che si è condotta rimane quello di studiare la possibilità di integrazione nello stack aziendale, è necessario valutare quanto i database individuati si prestino a tale operazione.\\
+
+\noindent Per ognuna delle implementazioni viste precedentemente è necessario seguire regole specifiche per mettere in comunicazione il proprio applicativo con il database.\\
+A volte alcune soluzioni sembrano più funzionali al proprio caso d'uso, ma non hanno un sistema ben documentato/conosciuto/sviluppato per interfacciarsi con l'applicativo che stiamo sviluppando, solitamente per motivi di compatibilità dei linguaggi e diffusione di librerie e driver utili.\\
+A tale scopo elenchiamo i software individuati e le loro opzioni di integrazione, tenendo a mente che lo stack aziendale si basa sull'utilizzo di java come linguaggio di programmazione.
+
+\subsubsection{Redis Stack}
+Per quanto riguarda Redis, Redis Stack e tutti i moduli ad esso collegati, il modo più semplice e "ad alto livello" per interagire con il database è sfruttare Redis OM, costruito sulla base di Spring Data Redis. Si tratta di un modulo del progetto "Spring Data", che racchiude librerie specifiche per interagire con diversi database usando il framework Spring.
+
+\subsubsection{Cassandra}
+Cassandra può essere utilizzato in modo facile tramite Astra DB, un multi-cloud DBaaS costruito su Cassandra.
+Per interagire con Astra si possono sfruttare le soluzioni più disparate, dall'utilizzo delle REST API all'implementazione di driver specifici per Java che ne facilitano l'utilizzo.
+
+\subsubsection{MongoDB}
+Mongo è una delle implementazioni NoSQL più diffuse e versatili. Si può utilizzare Atlas come "MongoDB as a Service", e anche in questo caso viene fornita la Query API per effettuare operazioni sui dati. Mongo fornisce driver per l'integrazione con Java, ma si può direttamente usare Spring Data, espressamente creato per fornire un modello familiare per datastores basato su Spring.
+
+\subsubsection{CouchDB}
+CouchDB non possiede librerie specifiche per l'integrazione e la comunicazione con applicativi scritti in Java. Quelle che esistono spesso non sono ufficiali e quindi utilizzabili "a proprio rischio e pericolo". Risulta possibile implementare la comunicazione direttamente tramite REST API, ma è dispendioso.
+Esiste tuttavia una versione di CouchDB sviluppata da IBM, denominata Cloudant, che propone il servizio cloud e l'integrazione con Java.
+
+\subsubsection{Neo4j}
+Anche Neo4j ha recentemente fornito una propria piattaforma, lanciando il progetto Aura per fornire DBaaS, con supporto per integrazione con Spring Boot e Spring Data.
+
+\subsubsection{Elasticsearch}
+Elasticsearch sfrutta Elastic Cloud come soluzione distribuita.
+Possiede varie funzionalità interessanti tra cui la possibilità di migrare i propri dati da un cloud all'altro, a prescindere dal provider.
+
+\subsection{Conclusione della fase esplorativa}
+Una volta studiate le opzioni esistenti sul mercato, si è passati alla fase di analisi interna per scoprire quali sono le soluzioni attualmente implementate dall'azienda, come funzionano e quali sono i loro punti critici.
+
+%**************************************************************
+\section{Panoramica su InvoiceChannel e soluzioni RDBMS adottate in Ifin Sistemi}
+
+
+%**************************************************************
+\section{Selezione di un'alternativa}
+
