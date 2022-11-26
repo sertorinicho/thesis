@@ -105,11 +105,45 @@
 \usepackage{colortbl}         % tabelle con righe colorate
 \usepackage{enumitem}         % cambiare il margine degli elenchi nelle tabelle
 
+\usepackage{xcolor,listings}                % codeblocks
+\usepackage{textcomp}
+\usepackage{color}
+
+\definecolor{mongogreen}{HTML}{A0C080}
+
+\definecolor{codegreen}{HTML}{00C900}
+    \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+    \definecolor{codepurple}{HTML}{C42043}
+    \definecolor{backcolour}{HTML}{F2F2F2}
+    \definecolor{bookColor}{cmyk}{0,0,0,0.90}  
+    \color{bookColor}
+
+\lstset{upquote=true}
+
+\lstdefinestyle{SQLstyle}{
+        backgroundcolor=\color{backcolour},   
+        commentstyle=\color{codegreen},
+        keywordstyle=\color{codepurple},
+        numberstyle=\footnotesize\color{codegray},
+        stringstyle=\color{codepurple},
+        basicstyle=\footnotesize,
+        breakatwhitespace=false,         
+        breaklines=true,                 
+        captionpos=b,                    
+        keepspaces=true,                 
+        numbers=left,                    
+        numbersep=-10pt,                  
+        showspaces=false,                
+        showstringspaces=false,
+        showtabs=false,      
+    }
+
+\lstset{style = SQLstyle}
+
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
-\definecolor{mongogreen}{HTML}{A0C080}
 
 
 \usepackage[toc, acronym]{glossaries}   % glossario
