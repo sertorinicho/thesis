@@ -3,43 +3,46 @@
 % !TEX root = ../tesi.tex
 
 %**************************************************************
-\chapter{Progettazione e codifica}
-\label{cap:capitolo5}
+\chapter{Sperimentazione}
+\label{cap:sperimentazione}
 %**************************************************************
+\section{Popolamento dei database}
 
-\intro{Breve introduzione al capitolo}\\
+Portata a termine la predisposizione di strumenti ed ambienti di lavoro, e determinata la struttura dei database, è ora possibile andare a caricare al loro interno i dati che li popolano.\\
+
+\subsection{Creazione dei dati}
+Per effettuare test di carico sui database è necessario che questi contengano una quantità di dati elevata. Si è scelto di generare dei dati ``fantoccio'' per automatizzare il processo.\\
+Scegliendo lo strumento giusto, si possono così ottenere dati realistici in quanto a contenuto e dimensione, per fare in modo che le misurazioni effettuate sui tempi di esecuzione delle query abbiano un significato anche al di fuori dell'ambiente di test.\\
+Sebbene inizialmente i dati siano stati generati tramite siti online che permettevano di esportare fino a un migliaio di tuple, è presto diventato chiaro come questo avrebbe rallentato di molto il processo di popolamento, rendendolo anche più complesso.\\
+
+\noindent Si è quindi deciso di ricorrere ad uno strumento diverso, disponibile come pacchetto di Node.js e installabile tramite nmp in modo da poter essere utilizzato da linea di comando.\\
+Questo strumento, datamaker, è in grado di generare un numero arbitrario di records basandosi su template forniti dall'utente. Senza contare che è molto più rapido dei sistemi online.\\
+Grazie a datamaker è stato possibile generare dei dati fittizzi secondo specifiche personalizzate, in quantità elevate.\\
+Questo sistema garantisce anche un buon grado di consistenza, poiché rimane la traccia dello schema utilizzato in forma di template, cosa che invece andava spesso persa nei processi online. Anche grazie a questo è stato possibile generare dati affidabili su cui condurre i test, variando la quantità di dati presente in un file di import senza alterare in alcun modo lo schema che definisce come questi dati vengono costruiti.\\
+
+
+\subsection{Formato dei dati}
+Quando si parla di formato dei dati è bene specificare la differenza tra formato di importazione dei dati e formato dei dati all'interno dei database.\\
+MongoDB salva i propri dati in formato BSON, una versione estesa del più comune JSON. Per la costruzione di tali dati è sufficiente creare dei file in formato JSON, e il database si occupa del resto.\\
+Utilizzando l'interfaccia di Compass è tuttavia possibile importare i propri dati da un file in formato CSV. Questo può facilitare il processo, specialmente quando si è più abituati a lavorare con questo tipo di formato.\\
+Per quanto riguarda PostgreSQL, anche l'interfaccia di pgAdmin permette di importare i propri dati da file, che devono essere in formato CSV.\\
+Tale file verrà elaborato e il suo contenuto trasferito automaticamente nelle tabelle su cui si esegue questa operazione.\\
+
+\noindent Nel caso di questo progetto, si è scelto di utilizzare file in formato CSV per l'importazione all'interno del database relazionale e file in formato JSON per l'importazione nel database NoSQL.\\
+Nonostante il contenuto di documenti e tabelle sia pressochè lo stesso, proprio perchè il confronto abbia senso, la differenza sta proprio nella struttura in cui sono organizzati questi dati. Per questo motivo non sarebbe stato possibile usare lo stesso file CSV per popolare entrambi i database, nonostante gli strumenti utilizzati lo avrebbero permesso.\\
 
 %**************************************************************
-\section{Tecnologie e strumenti}
-\label{sec:tecnologie-strumenti}
-
-Di seguito viene data una panoramica delle tecnologie e strumenti utilizzati.
-
-\subsection*{Tecnologia 1}
-Descrizione Tecnologia 1.
-
-\subsection*{Tecnologia 2}
-Descrizione Tecnologia 2
-
-%**************************************************************
-\section{Ciclo di vita del software}
-\label{sec:ciclo-vita-software}
-
-%**************************************************************
-\section{Progettazione}
-\label{sec:progettazione}
-
-\subsubsection{Namespace 1} %**************************
-Descrizione namespace 1.
-
-\begin{namespacedesc}
-    \classdesc{Classe 1}{Descrizione classe 1}
-    \classdesc{Classe 2}{Descrizione classe 2}
-\end{namespacedesc}
+\section{Metodi di monitoraggio dei risultati}
 
 
 %**************************************************************
-\section{Design Pattern utilizzati}
+\section{Creazione delle query}
+
 
 %**************************************************************
-\section{Codifica}
+\section{Statistiche sulle query eseguite sui due database}
+
+
+%**************************************************************
+\section{Inserimento della fattura integrale}
+
