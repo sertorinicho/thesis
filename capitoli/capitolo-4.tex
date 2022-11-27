@@ -380,7 +380,55 @@ Array of Ancestors consiste in un campo (un array appunto) che contiene il padre
 Materialized Path è leggermente diversa dagli altri come soluzione, ma consiste nel salvare come stringa un campo contenente gli antenati del nodo corrente separati con un "value separator", quindi per esempio il punto. In questo modo si facilitano le operazioni, che possono sfruttare quel campo in una regular expression.\\
 Ovviamente si possono applicare più pattern contemporaneamente, in base alle operazioni da svolgere, perchè ogni pattern funziona bene in determinati casi e ha difficoltà in altri.\\
 
+\begin{comment}
+\begin{center}
+
+        \renewcommand{\arraystretch}{1.5}
+    
+        \centering
+        \begin{longtable}{| L{2.5cm} | C{2.5cm} | C{2.5cm} | C{2.5cm} | C{2.5cm} |}
+            
+            \hline
+            
+            \rowcolor{mongogreen}
+            & \textbf{Parent References} & \textbf{Child References} & \textbf{Array of Ancestors} & \textbf{Materialized Path} \\
+            
+            \hline
+            
+            find ancestors of node & & & & \\
+            
+            \hline
+            
+            find who reports to node & & & & \\
+            
+            \hline
+
+            find all nodes under node & & & & \\
+
+            \hline
+
+            change data from one node to another & & & & \\
+            
+            \hline
+        
+            
+            \caption{Vantaggi e svantaggi dei tree pattern in base all'operazione coinvolta}
+        \end{longtable}
+        
+    
+\end{center}
+\end{comment}
+
 \subsubsection{Polymorphic Pattern}
 È un pattern semplice che sta alla base di altri pattern visti in precedenza. Affronta il problema di accorpare oggetti simili ma diversi nella stessa collezione, tenendo traccia del tipo specifico di oggetto tramite un campo apposito.\\
 Ci saranno quindi una serie di campi di base condivisi tra gli oggetti e altri campi specifici, a volte contenuti in subdocuments.\\
 
+\subsubsection{Riepilogo}
+È chiaro come in base al caso d'uso, l'utilizzo di un pattern può migliorare l'architettura che sta alla base del database.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[height=15em]{immagini/patterns-table.png}
+\caption{Applicabilità dei pattern in base al caso d'uso}
+\end{center}
+\end{figure}
