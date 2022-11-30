@@ -229,10 +229,10 @@ Esiste inoltre un altro concetto proposto da mongo per rappresentare moli di dat
 
 \subsubsection{One to One}
 Sono le relazioni che intercorrono tra campi della stessa tabella, ma vengono usate anche per connettere tabelle diverse, per separare i dati secondo una determinata logica.\\
-In MongoDB è possibile mantenere separati documenti che sono in relazione \textit{one to one}, usando quindi degli identificatori, oppure è possibile inserire i documenti uno nell'altro (\textit{embedding}).\\
+In MongoDB è possibile mantenere separati documenti che sono in relazione \textit{one to one}, usando quindi degli identificatori, oppure è possibile incorporare i documenti uno nell'altro (\textit{embedding}).\\
 Riassumendo:
 \begin{itemize}
-    \item Quando possibile è meglio effettuare \textit{embedding}, per non introdurre complessità inutile.
+    \item Quando possibile è meglio incorporare, per non introdurre complessità inutile.
 \end{itemize}
 
 \subsubsection{One to Many}
@@ -258,7 +258,7 @@ Riassumendo:
 
 \subsubsection{Zillions}
 Con questo termine si vuole semplicemente identificare un subset delle relazioni \textit{one to many}, in cui ``many'' è esponenzialmente grande. Serve un occhio di riguardo per evitare operazioni che recuperano tutti gli elementi coinvolti nella relazione, poiché questo andrebbe ovviamente a creare dei grossi rallentamenti.
-Per questo motivo, in caso di relazioni fatte così non è possibile pensare a soluzioni \textit{embedded}, e si può solo mantenere la relazione inserendo la reference nel lato ``zillions''.
+Per questo motivo, in caso di relazioni fatte così non è possibile pensare a soluzioni incorporate, e si può solo mantenere la relazione inserendo la reference nel lato ``zillions''.
 
 \subsection{Pattern}
 Un po come i \gls{design pattern} nella programmazione ad oggetti, i pattern di modellazione dei dati sono utili per rendere questi modelli più comprensibili, basandosi su principi provati.\\
@@ -273,7 +273,7 @@ Può essere il risultato dell'inserimento di documenti all'interno di altri docu
 \noindent Ci sono casi in cui la duplicazione può essere desiderabile. Per esempio se si fa \textit{embedding} dell'indirizzo di spedizione nell'ordine di un prodotto, questo sarà una copia dell'indirizzo dell'utente. Tuttavia l'informazione è statica e anche se l'utente cambiasse indirizzo in futuro questo non influenzerebbe gli ordini passati e già ricevuti.\\
 Questo porta ad una soluzione migliore rispetto al dover referenziare l'indirizzo, cosa che diventerebbe lenta e non necessaria per lo scopo dell'applicativo.\\
 
-\noindent Altro caso è quello della duplicazione di informazioni che hanno sì un peso, ma questo è talmente piccolo che non provoca problemi. Per esempio fare l'\textit{embedding} degli attori all'interno dei film in cui recitano è una soluzione accettabile, poiché anche in questo caso si tratta di informazioni statiche che non dovranno essere cambiate, e poco importa se lo stesso attore dovrà essere reinserito in molteplici film. Rimane una soluzione migliore rispetto al dover gestire una relazione \textit{many to many} tra attori e film in cui compaiono.\\
+\noindent Altro caso è quello della duplicazione di informazioni che hanno sì un peso, ma questo è talmente piccolo che non provoca problemi. Per esempio incorporare gli attori all'interno dei film in cui recitano è una soluzione accettabile, poiché anche in questo caso si tratta di informazioni statiche che non dovranno essere cambiate, e poco importa se lo stesso attore dovrà essere reinserito in molteplici film. Rimane una soluzione migliore rispetto al dover gestire una relazione \textit{many to many} tra attori e film in cui compaiono.\\
 
 \noindent Ultimo caso, molto più importante, è quello in cui la duplicazione c'è ed è fastidiosa.\\
 Questo è spesso il caso di dati che devono essere aggiornati nel tempo. Avere più copie di questi dati porta ad un \textit{overhead} di lavoro per mantenerli coerenti. In questi casi è necessario valutare tale \textit{overhead} a confronto con una soluzione che non usa il pattern in questione (che sta provocando la necessità di duplicazione), per capire quale direzione prendere.\\
@@ -295,11 +295,11 @@ Solitamente si hanno problemi con questo aspetto quando si eliminano parti di do
     \end{itemize}
     \item Qual'è il livello accettabile di \textit{staleness}?
     \begin{itemize}
-        \item Risolvere con update basati sullo \gls{stream di aggiornamenti}.
+        \item Risolvere con update basati sul \textit{\gls{change stream}}.
     \end{itemize}
     \item Quali parti del dato necessitano maggiormente di \textit{referential integrity}?
     \begin{itemize}
-        \item Risolvere o prevenire implementando transazioni o \gls{stream di aggiornamenti}.
+        \item Risolvere o prevenire implementando transazioni o \textit{\gls{change stream}}.
     \end{itemize}
 \end{itemize}
 

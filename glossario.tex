@@ -3,125 +3,131 @@
 % Glossario
 %**************************************************************
 
+\newglossaryentry{change stream}
+{
+    name=change stream,
+    description={Con riferimento a MongoDB, i \textit{change stream} consentono alle applicazioni di accedere alla modifica dei dati in tempo reale senza la complessità e il rischio di seguire l'\textit{operation log}. Le applicazioni possono utilizzare i \textit{change stream} per sottoscrivere tutte le modifiche ai dati su una singola raccolta, un database o un'intera distribuzione e reagire immediatamente.}
+}
+
 \newglossaryentry{DAO}
 {
     name=DAO,
-    description={}
+    description={I \textit{Data Access Object} sono un pattern utilizzato per separare il servizio business di alto livello dalle API di basso livello che hanno accesso ai dati.}
 }
 
 \newglossaryentry{database distribuito}
 {
     name=database distribuito,
-    description={}
+    description={Un database distribuito è un database che si trova sotto il controllo di un database management system (DBMS) nel quale gli archivi di dati non sono memorizzati sullo stesso computer bensì su più elaboratori o nodi.}
 }
 
 \newglossaryentry{DBaaS}
 {
     name=DBaaS,
-    description={}
+    description={Un DBaaS (noto anche come servizio di database gestito) è un servizio di cloud computing che consente agli utenti di accedere ad un sistema di database cloud senza acquistare e configurare hardware proprio, installare software di database o gestire il database personalmente.}
 }
 
 \newglossaryentry{design pattern}
 {
     name=design pattern,
-    description={}
+    description={Un design pattern è una soluzione progettuale generale ad un problema ricorrente. Si tratta di una descrizione o modello logico da applicare per la risoluzione di un problema che può presentarsi in diverse situazioni durante le fasi di progettazione e sviluppo del software.}
 }
 
 \newglossaryentry{DTO}
 {
     name=DTO,
-    description={}
+    description={Un \textit{Data Transfer Object} è un oggetto che trasporta dei dati tra i processi. Si può utilizzare questo pattern per facilitare la comunicazione tra due sistemi senza esporre informazioni potenzialmente riservate.}
 }
 
 \newglossaryentry{EclipseLink}
 {
     name=EclipseLink,
-    description={}
+    description={EclipseLink è un progetto open source di Eclipse Foundation. Il software fornisce un framework estensibile che consente agli sviluppatori Java di interagire con vari servizi di dati, inclusi database, servizi web e sistemi informativi aziendali. EclipseLink supporta una serie di standard di persistenza, tra cui Jakarta Persistenza (JPA).}
 }
 
 
-\newglossaryentry{Hybernate}
+\newglossaryentry{Hibernate}
 {
-    name=Hybernate,
-    description={}
+    name=Hibernate,
+    description={Hibernate è una piattaforma middleware open source per lo sviluppo di applicazioni Java, attraverso l'appoggio al relativo framework, che fornisce un servizio di Object-relational mapping (ORM) ovvero gestisce la persistenza dei dati sul database attraverso la rappresentazione e il mantenimento su database relazionale di un sistema di oggetti Java.}
 }
 
 \newglossaryentry{IoT}
 {
     name=IoT,
-    description={}
+    description={L'\textit{Internet of Things} (IoT), è un neologismo utilizzato nel mondo delle telecomunicazioni e dell'informatica che fa riferimento all'estensione di internet al mondo degli oggetti e dei luoghi concreti, che acquisiscono una propria identità digitale in modo da poter comunicare con altri oggetti nella rete e poter fornire servizi agli utenti.}
 }
 
 \newglossaryentry{JDBC}
 {
     name=JDBC,
-    description={}
+    description={\textit{Java DataBase Connectivity} è un connettore e un driver per database che consente l'accesso e la gestione della persistenza dei dati sulle basi di dati da qualsiasi programma scritto con il linguaggio di programmazione \textit{Java}, indipendentemente dal tipo di DBMS utilizzato.}
 }
 
 \newglossaryentry{JPA}
 {
     name=JPA,
-    description={}
+    description={Le Java Persistence API sono un framework per il linguaggio di programmazione \textit{Java} che si occupa della gestione della persistenza dei dati di un DBMS relazionale nelle applicazioni che usano le piattaforme \textit{Java}.}
 }
 
 \newglossaryentry{KPI}
 {
     name=KPI,
-    description={}
+    description={L’indicatore chiave di prestazione (o \textit{key performance indicator}) è una metrica che indica il livello di raggiungimento di un dato obiettivo da parte di un individuo, di un reparto o di un’azienda.}
 }
 
 \newglossaryentry{master-slave}
 {
     name=master-slave,
-    description={}
+    description={Il paradigma ``master-slave'' è un modello di comunicazione o controllo asimmetrico in cui un dispositivo o processo (il ``master'') controlla uno o più altri dispositivi o processi (gli ``slave'') e funge da hub di comunicazione.}
 }
 
 \newglossaryentry{Model-View-ViewModel}
 {
     name=Model-View-ViewModel,
-    description={}
+    description={Il Model-view-viewmodel (MVVM) è un modello architetturale che facilita la separazione dello sviluppo dell'interfaccia utente (GUI, la vista), dallo sviluppo della \textit{business logic} o logica di back-end (il modello) in modo tale che la vista non dipenda da alcuna piattaforma specifica del modello.}
+}
+
+\newglossaryentry{npm}
+{
+    name=npm,
+    description={npm (originariamente abbreviazione di \textit{Node Package Manager}) è un gestore di pacchetti per il linguaggio di programmazione \textit{JavaScript}. npm è il gestore di pacchetti predefinito per l'ambiente di runtime \textit{JavaScript} \textit{Node.js.}}
 }
 
 \newglossaryentry{operazioni CRUD}
 {
     name=operazioni CRUD,
-    description={}
+    description={\textit{Create}, \textit{read}, \textit{update}, e \textit{delete} (CRUD) sono le quattro operazioni basilari della gestione persistente dei dati.}
 }
 
 \newglossaryentry{Proof of Concept}
 {
     name=Proof of Concept,
-    description={}
+    description={Realizzazione incompleta o abbozzata di un determinato progetto o metodo, allo scopo di provarne la fattibilità o dimostrare la fondatezza di alcuni principi o concetti costituenti.}
 }
 
 
 \newglossaryentry{rest API}
 {
     name=rest API,
-    description={}
+    description={Un'API, o \textit{application programming interface}, è un insieme di regole che definiscono il modo in cui le applicazioni o i dispositivi possono connettersi e comunicare tra loro. Un'API REST è un'API conforme ai principi di progettazione REST, o \textit{representational state transfer architectural style}. Per questo motivo, le API REST sono talvolta chiamate \textit{RESTful APIs}.}
 }
 
 \newglossaryentry{SQL}
 {
     name=SQL,
-    description={}
-}
-
-\newglossaryentry{stream di aggiornamenti}
-{
-    name=stream di aggiornamenti,
-    description={}
+    description={SQL è un linguaggio standardizzato per database basati sul modello relazionale (RDBMS), progettato per eseguire operazioni di creazione e modifica di schemi di database, inserimento, modifica e gestione di dati memorizzati, creazione di strumenti di controllo ed accesso ai dati.}
 }
 
 \newglossaryentry{test di carico}
 {
     name=test di carico,
-    description={}
+    description={Un test di carico è mirato a misurare la propensione di una funzionalità a sopportare un numero definito e via via crescente di dati semplici o aggregati che dovranno essere visualizzati oppure elaborati.}
 }
 
 \newglossaryentry{Tomcat}
 {
     name=Tomcat,
-    description={}
+    description={Apache Tomcat è un server web (nella forma di contenitore servlet) \textit{open source} sviluppato dalla Apache Software Foundation.}
 }
 
