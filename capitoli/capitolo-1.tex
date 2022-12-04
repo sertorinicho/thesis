@@ -9,7 +9,7 @@
 %**************************************************************
 \section{L'azienda}
 
-L'azienda proponente è Ifin Sistemi s.r.l., un'azienda di prodotto che si occupa principalmente di informatica finanziaria.
+L'azienda proponente è Ifin Sistemi s.r.l., un'azienda di prodotto che si occupa principalmente di informatica finanziaria (logo in Figura 1.1).
 Il suo \textit{core business} è incentrato su piattaforme che facilitano l'archiviazione di pratiche e documenti legali in modo sicuro e affidabile, e mediano l'invio di fatture elettroniche tra aziende e Sistema di Interscambio, un sistema informatico gestito dall'Agenzia delle Entrate.
 
 \vspace{15pt}
@@ -24,16 +24,16 @@ Il suo \textit{core business} è incentrato su piattaforme che facilitano l'arch
 %**************************************************************
 \section{Situazione attuale}
 
-I due prodotti di punta dell'azienda, che compongono il \textit{core business} sopra accennato, sono LegalArchive e InvoiceChannel. All'interno di Ifin coesistono vari team che mantengono la codebase di questi software, occupandosi della loro manutenzione e della modellazione di nuove funzionalità richieste dai clienti.\\
+I due prodotti di punta dell'azienda, che compongono il \textit{core business} sopra accennato, sono \textit{LegalArchive} e \textit{InvoiceChannel}. All'interno di Ifin, coesistono vari team che mantengono la codebase di questi software, occupandosi della loro manutenzione e della modellazione di nuove funzionalità richieste dai clienti.\\
 A livello pratico, il codice per i software di Ifin è scritto in \textit{Java}, appoggiato quando serve al framework \textit{Spring}.\\
-All'interno di quello che è lo stack tecnologico aziendale, data la scelta del linguaggio di programmazione, troviamo quello che può essere considerato uno standard per lo sviluppo di applicativi che fanno largo uso di database. Tecnologie come \gls{JPA}, \gls{JDBC}, \gls{Tomcat}, \gls{Hibernate} ed \gls{EclipseLink} risultano essere mattoni fondamentali alla base dei software di Ifin.\\
+All'interno di quello che è lo stack tecnologico aziendale, data la scelta del linguaggio di programmazione, troviamo quello che può essere considerato uno standard per lo sviluppo di applicativi che fanno largo uso di database. Tecnologie come \gls{JPA}\ped{G}, \gls{JDBC}\ped{G}, \gls{Tomcat}\ped{G}, \gls{Hibernate}\ped{G} ed \gls{EclipseLink}\ped{G} risultano essere mattoni fondamentali alla base dei software di Ifin.\\
 Infine, per quanto riguarda la scelta dei database veri e propri, anche in questo caso l'azienda fa riferimento a quelli che sono gli standard dell'industria. Si parla quindi di database relazionali, e più nello specifico di \textit{Oracle Database} e \textit{Microsoft SQL Server}.\\
 
 %**************************************************************
 \section{Esigenze da cui nasce l'idea del progetto}
 
 Sebbene attualmente, all'interno dell'azienda, siano implementate varie soluzioni intelligenti per garantire il funzionamento delle piattaforme anche in situazioni di stress dei sistemi (come per esempio il partizionamento delle tabelle più grandi), i database relazionali possono soffrire di problemi di scalabilità quando la mole di dati che devono gestire raggiunge determinate dimensioni.\\
-L'utilizzo di una soluzione NoSQL è pertanto un'allettante alternativa, proprio perchè spesso scalabilità e affidabilità sono caratteristiche centrali di queste tecnologie. Occorre tuttavia effettuare uno studio più completo per determinare se l'utilizzo di questo tipo di database si presta realmente alle necessità e alle complessità dei sistemi di Ifin, per poter giustificare un investimento non indifferente di risorse nella conversione e migrazione che ne conseguirebbe.
+L'utilizzo di una soluzione NoSQL è pertanto un'allettante alternativa, proprio perchè spesso scalabilità e affidabilità sono caratteristiche centrali di queste tecnologie\cite{site:mongoarticleadvantages}. Occorre tuttavia effettuare uno studio più completo per determinare se l'utilizzo di questo tipo di database si presta realmente alle necessità e alle complessità dei sistemi di Ifin, per poter giustificare un investimento non indifferente di risorse nella conversione e migrazione che ne conseguirebbe.
 Il progetto di stage si inserisce in questo contesto, unendo le necessità dell'azienda alla possibilità di effettuare una ricerca consocitiva dei database NoSQL.\\
 
 %**************************************************************
@@ -44,9 +44,11 @@ Il progetto di stage si inserisce in questo contesto, unendo le necessità dell'
     
     \item[{\hyperref[cap:contesto]{Il terzo capitolo}}] descrive il contesto del progetto, presentando nel dettaglio le tecnologie studiate e quelle già implementate dall'azienda.
     
-    \item[{\hyperref[cap:metodologie]{Il quarto capitolo}}] approfondisce la fase di preparazione alla sperimentazione, con il settaggio degli strumenti necessari e l'organizzazione dell'ambiente di test.
+    \item[{\hyperref[cap:strumenti]{Il quarto capitolo}}] descrive gli strumenti utilizzati per il confronto.
+
+    \item[{\hyperref[cap:progettazione]{Il quarto capitolo}}] approfondisce la fase di preparazione alla sperimentazione, e descrive l'organizzazione dell'ambiente di test.
     
-    \item[{\hyperref[cap:sperimentazione]{Il quinto capitolo}}] descrive la fase di sperimentazione e raccolta dei dati utili al confronto che sta al centro del progetto.
+    \item[{\hyperref[cap:sperimentazione]{Il sesto capitolo}}] descrive la fase di sperimentazione e raccolta dei dati utili al confronto che sta al centro del progetto.
     
-    \item[{\hyperref[cap:conclusioni]{Il sesto capitolo}}] contiene le conclusioni elaborate al termine del tirocinio.
+    \item[{\hyperref[cap:conclusioni]{Il settimo capitolo}}] contiene le conclusioni elaborate al termine del tirocinio.
 \end{description}
