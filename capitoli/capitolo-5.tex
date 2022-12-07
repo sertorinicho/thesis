@@ -9,27 +9,28 @@
 
 L'idea generale per effettuare il confronto tra le prestazioni di database relazionali e database NoSQL è di creare un \gls{Proof of Concept}\ped{G} in grado di gestire i dati di uno dei software di punta dell'azienda (o comunque dati molto simili ad essi per quanto riguarda mole e contenuto), e di fare questo lavoro per entrambi i tipi di database. Una volta fatto ciò, si potranno elaborare delle query che mettano a confronto le prestazioni.\\
 
-\noindent Viste le considerazioni fatte sui due software ``fratelli'', ossia LegalArchive e InvoiceChannel, e considerato il risultato dei dialoghi avuti con i team leader di entrambi i progetti, la scelta è ricaduta su InvoiceChannel. Il motivo principale di questa scelta è che sebbene i due software siano piuttosto simili nella loro parte di \textit{backend}, legata ai database, InvoiceChannel è un software leggermente più recente e per questo meno convoluto di LegalArchive.\\
+\noindent Viste le considerazioni fatte sui due software ``fratelli'', ossia \textit{LegalArchive} e \textit{InvoiceChannel}, e considerato il risultato dei dialoghi avuti con i team leader di entrambi i progetti, la scelta è ricaduta su \textit{InvoiceChannel}. Il motivo principale di questa scelta è che sebbene i due software siano piuttosto simili nella loro parte di \textit{backend}, legata ai database, \textit{InvoiceChannel} è un software leggermente più recente e per questo meno convoluto di \textit{LegalArchive}.\\
 Sebbene questi siano progetti commerciali, dotati di estensiva documentazione, è bene considerare che nel tempo allocato per effetturare lo stage non sarebbe stato possibile approfondire nel dettaglio tutti gli aspetti di questi software.\\
-Per lo stesso motivo, anche una volta scelto InvoiceChannel, è stato necessario condurre uno studio per identificare una piccola parte del database che esso utilizza, su cui basarsi per costruire i database necessari ai test di confronto.\\
+Per lo stesso motivo, anche una volta scelto \textit{InvoiceChannel}, è stato necessario condurre uno studio per identificare una piccola parte del database che esso utilizza, su cui basarsi per costruire i database necessari ai test di confronto.\\
 
 
 %**************************************************************
 \section{Modellazione del database relazionale}
-Una volta definite queste premesse, è stato effettuato uno studio approfondito della struttura del database di InvoiceChannel, ricostruendo le relazioni tra tabelle a partire da un file in formato \texttt{SQL} fornito dal team di test.\\
+Una volta definite queste premesse, è stato effettuato uno studio approfondito della struttura del database di \textit{InvoiceChannel}, ricostruendo le relazioni tra tabelle a partire da un file in formato \texttt{SQL} fornito dal team di test.\\
 Esso contiene più di ottantamila righe di codice e definisce la struttura, il contenuto e le relazioni tra le circa 150 tabelle che compongono un database utilizzato per effettuare test di vario tipo all'interno dell'azienda.\\
 
-\noindent Risulta ovvio come InvoiceChannel sia troppo grande e complesso per poter essere rimodellato nella sua interezza in questo contesto. Anche pensare di utilizzarne soltanto una sezione risulta piuttosto complesso, poichè tutte le tabelle sono estremamente interconesse.\\
+\noindent Risulta ovvio come \textit{InvoiceChannel} sia troppo grande e complesso per poter essere rimodellato nella sua interezza in questo contesto. Anche pensare di utilizzarne soltanto una sezione risulta piuttosto complesso, poichè tutte le tabelle sono estremamente interconesse.\\
 Un ulteriore livello di complessità viene posto dalle query, anch'esse molto convolute, che fanno spesso un uso massiccio di operazioni di \textit{join}.\\
-L'opzione migliore è quindi ricostruire effettivamente un pezzetto di database di InvoiceChannel ``ad-hoc'', per soddisfare le necessità del progetto, sia in formato RDBMS, sia in formato NoSQL.\\
+L'opzione migliore è quindi ricostruire effettivamente un pezzetto di database di \textit{InvoiceChannel} ``ad-hoc'', per soddisfare le necessità del progetto, sia in formato RDBMS, sia in formato NoSQL.\\
 
 \subsection{Definizione di tabelle e relazioni}
-La sezione in questione è quella relativa alle fatture, che risulta piuttosto centrale allo scopo del software. Le tabelle coinvolte nel diagramma ER (entità-relazione), visibile in figura 5.1, sono quelle che si occupano di immagazzinare i dati relativi alle fatture elettroniche, lo stato dei processi che le coinvolgono, i documenti ad essa collegati e l'ente che l'ha generata.\\
+La sezione in questione è quella relativa alle fatture, che risulta piuttosto centrale allo scopo del software. Le tabelle coinvolte nel diagramma ER (entità-relazione), visibile in \autoref{fig:schema-er}, sono quelle che si occupano di immagazzinare i dati relativi alle fatture elettroniche, lo stato dei processi che le coinvolgono, i documenti ad essa collegati e l'ente che l'ha generata.\\
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=22em]{immagini/ER-Mock-IC.png}
-\caption{Diagramma per la sezione semplificata di InvoiceChannel}\label{img:schema-er}
+\caption{Diagramma per la sezione semplificata di \textit{InvoiceChannel}}
+\label{fig:schema-er}
 \end{center}
 \end{figure}
 
@@ -133,7 +134,7 @@ CREATE TABLE REPOSITORY(
 
 %**************************************************************
 \section{Modellazione del database in MongoDB}
-In seguito alla costruzione del database relazionale che semplifica InvoiceChannel, si può iniziare a costruirne la controparte NoSQL seguendo il modello documentale per implementarla con MongoDB.\\
+In seguito alla costruzione del database relazionale che semplifica \textit{InvoiceChannel}, si può iniziare a costruirne la controparte NoSQL seguendo il modello documentale per implementarla con MongoDB.\\
 
 \subsection{Relazioni tra tabelle}
 Sebbene sia un modello documentale, Mongo mantiene comunque la capacità di mettere in relazione documenti provenienti da collezioni diverse. Bisogna tuttavia farlo nel modo corretto perché questo porti dei vantaggi.\\
@@ -233,10 +234,11 @@ Per risolvere questo problema si usa il pattern degli attributi. L'idea è di ra
 \begin{center}
 \includegraphics[height=15em]{immagini/attribute-pattern.png}
 \caption{Esempio di utilizzo dell'attribute pattern}
+\label{fig:attributepattern}
 \end{center}
 \end{figure}
 
-\noindent In questo modo si possono inserire indici ed effettuare ricerche su \texttt{releases.v}, come si può vedere nell'esempio in Figura 5.2.\\
+\noindent In questo modo si possono inserire indici ed effettuare ricerche su \texttt{releases.v}, come si può vedere nell'esempio in \autoref{fig:attributepattern}.\\
 I casi d'uso più comuni sono il raggruppamento di caratteristiche di un prodotto, o di un set di campi che hanno lo stesso tipo (come visto sopra per le date).
 
 \subsubsection{Extended Reference Pattern}
@@ -305,17 +307,18 @@ Ovviamente si possono applicare più pattern contemporaneamente, in base alle op
 Ci saranno quindi una serie di campi di base condivisi tra gli oggetti e altri campi specifici, a volte contenuti in subdocuments.\\
 
 \subsubsection{Riepilogo}
-È chiaro come in base al caso d'uso, l'utilizzo di un pattern può migliorare l'architettura che sta alla base del database. Come evidenziato in Figura 5.3, è sempre bene tenere a mente che pattern diversi sono utili in contesti diversi.
+È chiaro come in base al caso d'uso, l'utilizzo di un pattern può migliorare l'architettura che sta alla base del database. Come evidenziato in \autoref{fig:tabpattern}, è sempre bene tenere a mente che pattern diversi sono utili in contesti diversi.
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=25em]{immagini/patterns-table.png}
 \caption{Applicabilità dei pattern in base al caso d'uso}
+\label{fig:tabpattern}
 \end{center}
 \end{figure}
 
 \section{Migrazione del database relazionale nel modello NoSQL}
-Il database relazionale costruito ed inserito all'interno di PostgreSQL è descritto dalla \autoref{img:schema-er}. Per costruire l'architettura dei documenti che risiederanno all'interno del database NoSQL, vengono riassunti i contenuti di tale figura:\\
+Il database relazionale costruito ed inserito all'interno di PostgreSQL è descritto dalla \autoref{fig:schema-er}. Per costruire l'architettura dei documenti che risiederanno all'interno del database NoSQL, vengono riassunti i contenuti di tale figura:\\
 \begin{itemize}
     \item \texttt{INVOICE} contiene dei dati relativi alla fattura inserita dall'utente;
     \item \texttt{OPERATIONS} contiene un messaggio relativo allo stato di tale fattura;
@@ -337,16 +340,17 @@ Il database relazionale costruito ed inserito all'interno di PostgreSQL è descr
 Questo vale per tabelle in relazione \textit{One to Many}, ma soprattutto \textit{One to One}.\\
 Sarebbe quindi il caso di accorpare \texttt{INVOICE} e \texttt{OPERATIONS}, ovvero le fatture assieme con le operazioni ad esse associate (sostanzialmente un messaggio sullo stato della fattura).\\
 
-\noindent In base alle best practices proposte dal team di MongoDB, la soluzione più coerente per costruire il database scelto per il confronto prestazionale individua tre collection separate per \texttt{INVOICE}, \texttt{DOCUMENT} e \texttt{ORGANIZATION}, strutturate come in Figura 5.4.\\
+\noindent In base alle best practices proposte dal team di MongoDB, la soluzione più coerente per costruire il database scelto per il confronto prestazionale individua tre collection separate per \texttt{INVOICE}, \texttt{DOCUMENT} e \texttt{ORGANIZATION}, strutturate come in \autoref{fig:mongoer}.\\
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=18em]{immagini/ER-Mongo-IC.png}
 \caption{Diagramma per l'architettura del database documentale}
+\label{fig:mongoer}
 \end{center}
 \end{figure}
 
-\noindent A seguito dello studio condotto sui pattern esistenti per la costruzione di database di questo tipo, risulta chiaro come l'aggiunta di uno di essi sarebbe una forzatura. Alcuni sarebbero indubbiamente utili qualora questo tipo di migrazione dovesse essere effettuato per componenti più corpose di InvoiceChannel, ma per quanto riguarda la parte selezionata per questa tesi, essa risulta già adeguata senza l'utilizzo di pattern.
+\noindent A seguito dello studio condotto sui pattern esistenti per la costruzione di database di questo tipo, risulta chiaro come l'aggiunta di uno di essi sarebbe una forzatura. Alcuni sarebbero indubbiamente utili qualora questo tipo di migrazione dovesse essere effettuato per componenti più corpose di \textit{InvoiceChannel}, ma per quanto riguarda la parte selezionata per questa tesi, essa risulta già adeguata senza l'utilizzo di pattern.
 
 \subsubsection{Schema del database NoSQL}
 Come già detto in fase di presentazione di MongoDB, questo tipo di database documentale è spesso denominato \textit{schema-less}. Ciò significa che a differenza dei database relazionali, un documento all'interno di MongoDB non deve rispettare alcuno schema per strutturare i dati al proprio interno.\\

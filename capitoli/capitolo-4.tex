@@ -14,7 +14,7 @@ Per poter eseguire il confronto tra le prestazioni di database relazionali e NoS
 
 %**************************************************************
 \section{Docker}
-Per poter effettuare test consistenti, evitare problemi di installazione e compartimentalizzare l'ambiente di lavoro, si è deciso di sfruttare Docker\cite{site:docker} (logo in Figura 4.1). Questo software permette di virtualizzare l'esecuzione di altri applicativi in ambienti chiusi e controllati, facilitando determinati processi di sviluppo. L'utilizzo di Docker in questo progetto lo rende più maneggevole e lineare.\\
+Per poter effettuare test consistenti, evitare problemi di installazione e compartimentalizzare l'ambiente di lavoro, si è deciso di sfruttare Docker\cite{site:docker}\cite{site:dockerdocs} (logo in \autoref{fig:docker}). Questo software permette di virtualizzare l'esecuzione di altri applicativi in ambienti chiusi e controllati, facilitando determinati processi di sviluppo. L'utilizzo di Docker in questo progetto lo rende più maneggevole e lineare.\\
 
 \noindent Per poter utilizzare Docker è necessario prima comprendere alcune parole chiave e ciò che esse rappresentano\cite{site:fireshipdocker}:
 \begin{itemize}
@@ -36,6 +36,7 @@ Per facilitare poi i processi di comunicazione con i database verranno utilizzat
 \begin{center}
 \includegraphics[height=6em]{immagini/tecnologies-logos/Docker-Logo.png}
 \caption{Logo di Docker}
+\label{fig:docker}
 \end{center}
 \end{figure}
 
@@ -45,7 +46,7 @@ Dopo aver scelto Docker come ambiente in cui montare i database, alcune altre sc
 Sebbene infatti sia possibile \textit{dockerizzare} moltissimi software, per gli scopi di questa tesi è risultato più sensato partire da immagini pre-esistenti ed affidabili, disponibili sulla piattaforma ufficiale del software (hub-docker).\\
 Questo ha permesso di non investire troppo tempo nella preparazione degli strumenti e di concentrare le risorse disponibili nell'effettivo confronto tra database.\\
 
-\noindent Per tutti questi motivi si è quindi scelto di usare PostgreSQL (logo in Figura 4.2) come database relazionale da portare a confronto con MongoDB.\\
+\noindent Per tutti questi motivi si è quindi scelto di usare PostgreSQL (logo in \autoref{fig:postgresql}) come database relazionale da portare a confronto con MongoDB.\\
 PostreSQL è un database relazionale \textit{open source} molto robusto che si presta bene per rappresentare le prestazioni di un generico database di questa categoria\cite{site:postgres}. Esso è inoltre presente nell'hub di docker con un'immagine ufficiale, ed è quindi facile da far funzionare all'interno di un container a differenza di altri prodotti simili.\\
 Sebbene PostgreSQL non sia utilizzato massivamente all'interno dell'azienda, risulta comunque molto simile alle sue controparti non open source, \textit{MSSQL} e \textit{Oracle Server}, che sono invece largamente usate all'interno di Ifin e sarebbero oggetto di una potenziale migrazione qualora i risultati di questa tesi si rivelassero convincenti.\\
 
@@ -61,12 +62,13 @@ Per quanto riguarda PostgreSQL, la scelta è ricaduta su pgAdmin, un'interfaccia
 \begin{center}
 \includegraphics[height=7em]{immagini/tecnologies-logos/postgresql-logo.png}
 \caption{Logo di PostgreSQL}
+\label{fig:postgresql}
 \end{center}
 \end{figure}
 
 %**************************************************************
 \section{MongoDB e tecnologie annesse}
-Come già anticipato in \autoref{sec:fineindagine}, per mettere a confronto le potenzialità dei database NoSQL rispetto a quelli di tipo relazionale è stato scelto MongoDB (logo in Figura 4.3).\\
+Come già anticipato in \autoref{sec:fineindagine}, per mettere a confronto le potenzialità dei database NoSQL rispetto a quelli di tipo relazionale è stato scelto MongoDB (logo in \autoref{fig:mongodb}).\\
 Anche in questo caso la scelta è stata guidata da più fattori che rendono MongoDB il candidato perfetto per questa ricerca.\\
 Lo schema dinamico su cui esso si basa, assieme alla struttura dei dati che permette di immagazzinare, rappresentano fattori che potrebbero migliorare il modo in cui le informazioni vengono tutt'ora gestite ed archiviate da Ifin.\\
 La popolarità di MongoDB determina inoltre un'abbondanza di guide e documentazione a cui fare riferimento per condurre un'analisi accurata delle sue potenzialità.\\
@@ -82,6 +84,7 @@ Compass è un software sviluppato direttamente dal team di MongoDB che mette a d
 \begin{center}
 \includegraphics[height=6em]{immagini/tecnologies-logos/MongoDB-Logo.png}
 \caption{Logo di MongoDB}
+\label{fig:mongodb}
 \end{center}
 \end{figure}
 

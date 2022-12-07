@@ -16,7 +16,7 @@ Scegliendo lo strumento giusto, si possono così ottenere dati realistici in qua
 Sebbene inizialmente i dati siano stati generati tramite siti online che permettono di esportare fino a un migliaio di tuple, è presto diventato chiaro come questo avrebbe rallentato di molto il processo di popolamento, rendendolo anche più complesso.\\
 
 \noindent Si è quindi deciso di ricorrere ad uno strumento diverso, disponibile come pacchetto di \textit{Node.js} e installabile tramite \gls{npm}\ped{G} (\textit{node package manager}) in modo da poter essere utilizzato da linea di comando.\\
-Questo strumento, \textit{datamaker}, è in grado di generare un numero arbitrario di records basandosi su template forniti dall'utente. Senza contare che è molto più rapido dei sistemi online.\\
+Questo strumento, \textit{datamaker}\cite{site:datamaker}, è in grado di generare un numero arbitrario di records basandosi su template forniti dall'utente. Senza contare che è molto più rapido dei sistemi online.\\
 Grazie a \textit{datamaker} è stato possibile generare dei dati fittizzi secondo specifiche personalizzate, in quantità elevate.\\
 Questo sistema garantisce anche un buon grado di consistenza, poiché rimane la traccia dello schema utilizzato in forma di template, cosa che invece andava spesso persa nei processi online. Anche grazie a questo è stato possibile generare dati affidabili su cui condurre i test, variando la quantità di dati presente in un file di import senza alterare in alcun modo lo schema che definisce come questi dati vengono costruiti.\\
 
@@ -39,18 +39,18 @@ Il tempo impiegato, tuttavia, può essere fuorviante. La notifica che per esempi
 Per eseguire un confronto più preciso è necessario capire come estrapolare i dati che cerchiamo in entrambe le basi di dati.
 
 \subsection{Estrapolare i tempi di esecuzione in PostgreSQL usando pgAdmin}
-PostgreSQL, come molti database relazionali e non, mette a disposizione il metodo \texttt{EXPLAIN}. Quando questo viene utilizzato in testa ad una query, il risultato che si ottiene è una serie di informazioni riguardanti la sua esecuzione. Tra i vari parametri di questo metodo, quelli più interessanti per questo caso d'uso sono \texttt{ANALYZE} e \texttt{TIMING}, che possono essere specificati per ottenere informazioni specifiche riguardanti il tempo di esecuzione delle varie sezioni di query.\\
+PostgreSQL, come molti database relazionali e non, mette a disposizione il metodo \texttt{EXPLAIN}\cite{site:postgresdocs}. Quando questo viene utilizzato in testa ad una query, il risultato che si ottiene è una serie di informazioni riguardanti la sua esecuzione. Tra i vari parametri di questo metodo, quelli più interessanti per questo caso d'uso sono \texttt{ANALYZE} e \texttt{TIMING}, che possono essere specificati per ottenere informazioni specifiche riguardanti il tempo di esecuzione delle varie sezioni di query.\\
 Le query che vengono eseguite in questo modo vengono comunque portate a termine dal database, anche se il risultato di eventuali operazioni di \texttt{SELECT} non viene mostrato a schermo.\\
 Per impedire che questo accada è bene seguire la query con un'operazione di \textit{rollback}.\\
 
-\noindent pgAdmin permette di utilizzare il metodo \texttt{EXPLAIN} eseguendo la query che si vuole analizzare in uno spazio apposito dell'interfaccia. Il risultato dell'operazione viene riportato in una tabella per semplificare la lettura, mentre vengono messi a disposizione anche una vista a grafo ed una tabella più complessa per il confronto tra tempi stimati dal metodo e tempi reali di esecuzione.\\
+\noindent pgAdmin permette di utilizzare il metodo \texttt{EXPLAIN} eseguendo la query che si vuole analizzare in uno spazio apposito dell'interfaccia\cite{site:pgAdmin}. Il risultato dell'operazione viene riportato in una tabella per semplificare la lettura, mentre vengono messi a disposizione anche una vista a grafo ed una tabella più complessa per il confronto tra tempi stimati dal metodo e tempi reali di esecuzione.\\
 Agli scopi di questa tesi, verranno prese in considerazione le informazioni riportate nella tabella principale, dove i tempi di completamento delle operazioni sono all'occorrenza separati nei vari pezzi che compongono la query.
 
 \subsection{Estrapolare i tempi di esecuzione in MongoDB usando Compass}
-All'interno di MongoDB si utilizza un linguaggio specifico per estrapolare informazioni dai database. Se per i database relazionali si parla di Structured Query Language, in questo caso invece si usa \textit{MQL}, ovvero MongoDB Query Language, basato sulla sintassi di \textit{JavaScript}.\\
+All'interno di MongoDB si utilizza un linguaggio specifico per estrapolare informazioni dai database\cite{site:mongodb}. Se per i database relazionali si parla di Structured Query Language, in questo caso invece si usa \textit{MQL}, ovvero MongoDB Query Language, basato sulla sintassi di \textit{JavaScript}.\\
 
 \noindent Attraverso un'ampia selezione di metodi questo linguaggio offre la possibilità di effettuare tutte le \gls{operazioni CRUD}\ped{G}, oltre ad alcune altre funzionalità che possono tornare utili in varie situazioni, dalla gestione dei database alla misurazione delle prestazioni delle query.\\
-Utilizzando Compass, è poi possibile sfruttare una finestra apposita dell'interfaccia grafica per eseguire l'\textit{explain plan} di alcune query. Questa funzionalità è limitata tuttavia all'analisi del metodo \texttt{find()}, che corrisponde ad una select in \gls{SQL}\ped{G}.\\
+Utilizzando Compass, è poi possibile sfruttare una finestra apposita dell'interfaccia grafica per eseguire l'\textit{explain plan} di alcune query\cite{site:mongodbcompass}. Questa funzionalità è limitata tuttavia all'analisi del metodo \texttt{find()}, che corrisponde ad una select in \gls{SQL}\ped{G}.\\
 Per gli altri metodi è necessario approfondire il funzionamento del linguaggio di MongoDB per effettuare manualmente una ricerca sui tempi di esecuzione delle varie operazioni.\\
 Una volta determinato quali metodi concatenare per ottenere i risultati desiderati, è poi necessario eseguire tali comandi nella shell di MongoDB. Fortunatamente questa è accessibile sempre dall'interfaccia di Compass, rendendo il processo più lineare.\\
 
@@ -61,39 +61,72 @@ Il confronto tra i due database è stato effettuato creando sette copie di query
 La creazione delle query è stata basata su una esemplificazione dei casi d'uso più comuni individuati per InvoicheChannel.
 
 \subsection{Query 1}
-La prima query, esposta in Figura 6.1, è piuttosto semplice. Effettua una ricerca generica per elencare tutte le invoice e le operations ad esse collegate.\\
+La prima query, esposta in \autoref{fig:query1}, è piuttosto semplice. Effettua una ricerca generica per elencare tutte le invoice e le operations ad esse collegate.\\
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=7em]{immagini/query/query1.png}
 \caption{Codice della query numero 1, scritto in entrambi i linguaggi}
+\label{fig:query1}
 \end{center}
 \end{figure}
 
 \noindent Facciamo notare che PostgreSQL crea automaticamente gli indici sulle primary keys, quindi sono stati indicizzati anche i campi ID dei documenti in MongoDB. Questo è stato fatto per effettuare un confronto alla pari, ma è anche dovuto al fatto che intorno ai 200.000 documenti MongoDB non permette più di effettuare operazioni di \texttt{sort()} se non viene integrato l'uso di indici.\\
+\noindent Nella \autoref{tab:query1} possiamo vedere i risultati del confronto sui tempi ottenuti ripetendo la stessa query su database popolati con un numero sempre maggiore di elementi.\\
 
-\noindent Nel seguente grafico (Figura 6.2) possiamo vedere i risultati del confronto sui tempi ottenuti ripetendo la stessa query su database popolati con un numero sempre maggiore di elementi.\\
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    
+    \centering
+    \begin{longtable}{| C{2.5cm} | C{4cm} | C{4cm} |}
+        
+        \hline
+        \rowcolor{mongogreen}
+        \textbf{Numero di elementi} & \textbf{Secondi impiegati: PostgreSQL} & \textbf{Secondi impiegati: MongoDB} \\
+        
+        \hline
+        5000 & 0,0047 & 0,007 \\
+        \hline 
+        10000 & 0,0111 & 0,014 \\
+        \hline 
+        25000 & 0,0253 & 0,2039 \\
+        \hline 
+        50000 & 0,0423 & 0,2793 \\
+        \hline 
+        100000 & 0,0833 & 1,0081 \\
+        \hline 
+        250000 & 0,2277 & 2,3048 \\
+        \hline
+        500000 & 0,4204 & 5,9701 \\
+        \hline
+        
+        \caption{Confronto sui tempi di esecuzione della query numero 1}
+        \label{tab:query1}
+    \end{longtable}
+\end{center}
+
+\noindent Dal grafico in \autoref{fig:query1.2} si evince quanto già scoperto durante lo studio delle tecnologie coinvolte nel confronto. L'utilizzo di documenti incorporati (in questo caso i dati dell'operation che riguarda l'invoice sono contenuti nel documento dell'invoice stessa) permette a MongoDB di evitare le operazioni di \texttt{join}, che rallentano di molto l'esecuzione delle query in PostgreSQL.\\
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=20em]{immagini/query/query1_results.png}
 \caption{Risultato del confronto, query numero 1}
+\label{fig:query1.2}
 \end{center}
 \end{figure}
-
-\noindent Dal grafico si evince quanto già scoperto durante lo studio delle tecnologie coinvolte nel confronto. L'utilizzo di documenti incorporati (in questo caso i dati dell'operation che riguarda l'invoice sono contenuti nel documento dell'invoice stessa) permette a MongoDB di evitare le operazioni di \texttt{join}, che rallentano di molto l'esecuzione delle query in PostgreSQL.\\
 
 \noindent Possiamo notare come la differenza sia ancora più evidente se cerchiamo gli stessi dati applicando una condizione di ricerca.\\
 
 %--------------------------------------------------------------
 
 \subsection{Query 2}
-Con la seconda query, esposta in Figura 6.3, cerchiamo tutte le invoice e le operations ad esse associate, questa volta limitandoci alle sole fatture che soddisfano una specifica condizione sul proprio numero identificativo.\\
+Con la seconda query, esposta in \autoref{fig:query2}, cerchiamo tutte le invoice e le operations ad esse associate, questa volta limitandoci alle sole fatture che soddisfano una specifica condizione sul proprio numero identificativo.\\
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=7em]{immagini/query/query2.png}
 \caption{Codice della query numero 2, scritto in entrambi i linguaggi}
+\label{fig:query2}
 \end{center}
 \end{figure}
 
@@ -103,17 +136,19 @@ Con la seconda query, esposta in Figura 6.3, cerchiamo tutte le invoice e le ope
 \begin{center}
 \includegraphics[height=16em]{immagini/query/query2_results1.png}
 \caption{Risultato del confronto, query numero 2}
+\label{fig:query2.2}
 \end{center}
 \end{figure}
 
 \noindent Questa query è stata testata su database contenenti 500.000 elementi, chiedendo loro di restituirne soltanto la metà.\\
-In Figura 6.4 si può vedere come, a prescindere dalla presenza dell'indice, MongoDB sia comunque più veloce di un ordine di grandezza.\\
-Inoltre, grazie agli strumenti messi a disposizione da PostgreSQL, possiamo anche vedere come è stato speso il tempo all'interno di questa query (Figura 6.5).
+In \autoref{fig:query2.2} si può vedere come, a prescindere dalla presenza dell'indice, MongoDB sia comunque più veloce di un ordine di grandezza.\\
+Inoltre, grazie agli strumenti messi a disposizione da PostgreSQL, possiamo anche vedere come è stato speso il tempo all'interno di questa query (\autoref{fig:query2.3}).
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=15em]{immagini/query/query2_results2.png}
 \caption{Utilizzo del tempo di esecuzione, query numero 2}
+\label{fig:query2.3}
 \end{center}
 \end{figure}
 
@@ -123,35 +158,38 @@ La sola operazione di Index Scan occupa PostgreSQL per circa 90 ms, un tempo che
 %--------------------------------------------------------------
 
 \subsection{Query 3}
-A confermare la tesi portata con la seconda query, effettuare una ricerca su un campo non indicizzato, in cui non è richiesto alcuna operazione di \texttt{join}, produce risultati più o meno simili per entrambi i sistemi: ~240ms per MongoDB contro i ~300ms per Postgres (query esposta in Figura 6.6).\\
+A confermare la tesi portata con la seconda query, effettuare una ricerca su un campo non indicizzato, in cui non è richiesto alcuna operazione di \texttt{join}, produce risultati più o meno simili per entrambi i sistemi: ~240ms per MongoDB contro i ~300ms per Postgres (query esposta in \autoref{fig:query3}).\\
 Anche in questo caso i test sono stati effettuati su database contenenti 500.000 elementi. Non sono riportati grafici a causa della minima differenza di prestazioni.\\
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=5em]{immagini/query/query3.png}
 \caption{Codice della query numero 3, scritto in entrambi i linguaggi}
+\label{fig:query3}
 \end{center}
 \end{figure}
 
 %--------------------------------------------------------------
 
 \subsection{Query 4}
-La query esposta in Figura 6.7 risulta utile per evidenziare un'altra differenza importante tra i due database, dovuta al diverso metodo di archiviazione dei dati (documenti \texttt{JSON} o tabelle).\\
+La query esposta in \autoref{fig:query4} risulta utile per evidenziare un'altra differenza importante tra i due database, dovuta al diverso metodo di archiviazione dei dati (documenti \texttt{JSON} o tabelle).\\
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=7em]{immagini/query/query4.png}
 \caption{Codice della query numero 4, scritto in entrambi i linguaggi}
+\label{fig:query4}
 \end{center}
 \end{figure}
 
 \noindent In questo caso vengono testati entrambi i database con 100.000 elementi inseriti.\\
-Si vogliono trovare i documenti con data di invio più recente. Dover accedere al contenuto dei campi sembrerebbe essere un lavoro più dispendioso quando si tratta di un campo di un documento, piuttosto che un campo di una tabella. Nel grafico riportato in Figura 6.8 si nota infatti che il risultato ottenuto conferma questa tesi.\\
+Si vogliono trovare i documenti con data di invio più recente. Dover accedere al contenuto dei campi sembrerebbe essere un lavoro più dispendioso quando si tratta di un campo di un documento, piuttosto che un campo di una tabella. Nel grafico riportato in \autoref{fig:query4.2} si nota infatti che il risultato ottenuto conferma questa tesi.\\
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=15em]{immagini/query/query4_results.png}
 \caption{Risultato del confronto, query numero 4}
+\label{fig:query4.2}
 \end{center}
 \end{figure}
 
@@ -164,39 +202,53 @@ Viene testata ora una query più complessa, utilizzata per effettuare l'update d
 \begin{center}
 \includegraphics[height=20em]{immagini/query/query5.png}
 \caption{Codice della query numero 5, scritto in entrambi i linguaggi}
+\label{fig:query5}
 \end{center}
 \end{figure}
 
-\noindent Per eseguire questa query in MongoDB, la concatenazione dei metodi è più complessa, come si può notare dalla Figura 6.9 che riporta il codice.\\
+\noindent Per eseguire questa query in MongoDB, la concatenazione dei metodi è più complessa, come si può notare dalla \autoref{fig:query5} che riporta il codice.\\
 Purtroppo Compass mette a disposizione l'interfaccia explain solo per il metodo \texttt{find()}. Come detto in precedenza dobbiamo quindi passare tramite \textit{mongosh}, il terminale di MongoDB su cui si possono eseguire tutti i comandi nella sua sintassi specifica.\\
-Inoltre, il sistema utilizzato precedentemente (ovvero concatenare il metodo \texttt{explain()} a fine query) non è disponibile per l'operazione di update, e bisogna quindi usare una sintassi più completa che prevede l'uso del metodo \texttt{runCommand()}, visibile in Figura 6.9.\\
+Inoltre, il sistema utilizzato precedentemente (ovvero concatenare il metodo \texttt{explain()} a fine query) non è disponibile per l'operazione di update, e bisogna quindi usare una sintassi più completa che prevede l'uso del metodo \texttt{runCommand()}, visibile in \autoref{fig:query5}.\\
 
 \noindent Il dato importante che traspare è la differenza nei tempi di esecuzione, che anche in questo caso favoriscono MongoDB, aggirandosi intorno ai 105 ms. Per postgres abbiamo tempi all'incirca doppi.\\
 
 %--------------------------------------------------------------
 
 \subsection{Query 6}
-La sesta query, esposta in Figura 6.10, è simile alla precedente. In questo caso tuttavia l'aggiornamento viene fatto sulla tabella \texttt{OPERATIONS}, e la condizione risiede in tabella \texttt{INVOICE}.\\
+La sesta query, esposta in \autoref{fig:query6}, è simile alla precedente. In questo caso tuttavia l'aggiornamento viene fatto sulla tabella \texttt{OPERATIONS}, e la condizione risiede in tabella \texttt{INVOICE}.\\
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=22em]{immagini/query/query6.png}
 \caption{Codice della query numero 6, scritto in entrambi i linguaggi}
+\label{fig:query6}
 \end{center}
 \end{figure}
 
 \noindent La query su PostgreSQL impiega dai 2 ai 5 minuti per essere portata a termine su un database contenente 100.000 elementi.\\
-Possiamo notare come quasi tutto questo tempo sia utilizzato per effettuare uno scan della tabella \texttt{OPERATIONS}, che viene poi aggiornata.\\
+Osservando la \autoref{tab:query6}, presa direttamente da pgAdmin, possiamo notare come quasi tutto questo tempo sia utilizzato per effettuare uno scan della tabella \texttt{OPERATIONS}, che viene poi aggiornata.\\
 
-% INSERIRE TABELLA AD-HOC AL POSTO DELL'IMMAGINE BRUTTA
-\begin{comment}
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[height=5em]{immagini/query/query6_results.png}
-\caption{Suddivisione dei tempi di esecuzione per la query numero 6 in PostgreSQL}
+\begin{center} 
+    \renewcommand{\arraystretch}{1.5}
+    
+    \centering
+    \begin{longtable}{| C{2.5cm} | C{4cm} | C{4cm} |}
+        
+        \hline
+        
+        \rowcolor{mongogreen}
+        \textbf{Node type} & \textbf{Count} & \textbf{Time spent} \\
+        
+        \hline
+        Sequence Scan & 2 & 141140.886 ms \\
+        \hline 
+        Update & 1 & 322.887 ms \\
+        \hline
+        
+        \caption{Estratto di tabella sui tempi di esecuzione della query numero 6 in pgAdmin}
+        \label{tab:query6}
+    \end{longtable}
 \end{center}
-\end{figure}
-\end{comment}
 
 \noindent MongoDB impiega soltanto 65 millisecondi per effettuare tutte le operazioni.\\
 Ripetendo la query su database più ampi il risultato non cambia. Per 250.000 elementi PostgreSQL impiega più di trenta minuti, MongoDB si mantiene sotto i 200 millisecondi. Il tempo raddoppia quando all'interno del database sono contenuti 500.000 elementi. Per questa quantità di dati, PostgreSQL non restituisce un risultato in tempi utili.\\
@@ -204,18 +256,19 @@ Ripetendo la query su database più ampi il risultato non cambia. Per 250.000 el
 %--------------------------------------------------------------
 
 \subsection{Query 7}
-La query riportata in Figura 5.11 rappresenta un altro caso d'uso importante.
+La query riportata in \autoref{fig:query7} rappresenta un altro caso d'uso importante.
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=22em]{immagini/query/query7.png}
 \caption{Codice della query numero 7, scritto in entrambi i linguaggi}
+\label{fig:query7}
 \end{center}
 \end{figure}
 
 \noindent Come già menzionato, MongoDB è sì un database NoSQL, ma tecnicamente è considerabile anche ``relazionale'', perchè consente di effettuare operazioni di \textit{lookup} tra \textit{collection} diverse per unire informazioni altrimenti separate. Questa, tuttavia, non è sicuramente la feature di punta di un database documentale, e si traduce quindi in un'operazione piuttosto lenta rispetto ad altre operazioni per cui un un database di questo tipo è stato espressamente studiato.\\
 
-\noindent Tutto questo è dimostrato dai dati statistici raccolti durante l'esecuzione delle query e riportati in Figura 5.12.\\
+\noindent Tutto questo è dimostrato dai dati statistici raccolti durante l'esecuzione delle query e riportati in \autoref{fig:query7.2}.\\
 Per PostgreSQL si tratta di una join piuttosto semplice, accoppiata ad un raggruppamento. Il tempo di esecuzione si aggira intorno ai 65 ms se le tabelle \texttt{INVOICE} e \texttt{ORGANIZATION} contengono 100.000 elementi ciascuna.\\
 MongoDB impiega tra i 5 e i 6 secondi per la stessa operazione, con la stessa quantità di dati.
 
@@ -223,6 +276,7 @@ MongoDB impiega tra i 5 e i 6 secondi per la stessa operazione, con la stessa qu
 \begin{center}
 \includegraphics[height=15em]{immagini/query/query7_results.png}
 \caption{Risultato del confronto, query numero 7}
+\label{fig:query7.2}
 \end{center}
 \end{figure}
 
@@ -231,7 +285,7 @@ MongoDB impiega tra i 5 e i 6 secondi per la stessa operazione, con la stessa qu
 %**************************************************************
 \section{Inserimento della fattura integrale}
 \label{sec:fattura-integrale}
-Uno dei casi d'uso di interesse per l'analisi condotta su InvoiceChannel è quello che riguarda il salvataggio delle fatture.\\
+Uno dei casi d'uso di interesse per l'analisi condotta su \textit{InvoiceChannel} è quello che riguarda il salvataggio delle fatture.\\
 Sebbene parte dei dati che le compongono sia salvata nella tabella invoice, per velocizzare l'accesso alle informazioni più importanti la fattura viene anche salvata per intero in formato \texttt{XML}.\\
 
 \noindent Questo ovviamente non può essere fatto all'interno del database, principalmente perchè salvare una così grande quantità di dati all'interno di un unico campo non è desiderabile.\\
@@ -245,6 +299,6 @@ In questo modo la fattura sarebbe sempre a disposizione per intero all'interno d
 \noindent Tale trasformazione è bidirezionale, quindi così come si è passati dall'\texttt{XML} al \texttt{JSON} si può fare il contrario senza alcuna perdita di dati. Questo è importante perchè a livello legale \texttt{XML} rimane il formato ufficiale per le fatture elettroniche, quindi in caso di necessità si può ricostruire l'originale.\\
 
 \noindent Tutto questo ovviamente ha un costo, e sta a chi crea un sistema di questo tipo il compito di soppesare pro e contro. MongoDB supporta l'inserimento di file \texttt{BSON} fino a 16 MB e una fattura tradotta in formato \texttt{JSON} occupa circa 5 KB, quindi sebbene appaia come un file ``grande'' all'occhio umano, si tratta di una dimensione bel al di sotto dei limiti strutturali del database. Le prestazioni non sarebbero intaccate da questo tipo di soluzione, anche quando si considera l'archiviazione di centinaia di migliaia di fatture, specialmente se si fa uso di indici.\\
-Anche il costo della traduzione da \texttt{XML} a \texttt{JSON} va sicuramente rendicontato, ma dai test condotti non sembra avere un grosso impatto. Utilizzando uno strumento esterno basato su \gls{npm}\ped{G} (come \textit{datamaker}) è possibile automatizzare questo processo ad un bassissimo costo computazionale.\\
+Anche il costo della traduzione da \texttt{XML} a \texttt{JSON} va sicuramente rendicontato, ma dai test condotti non sembra avere un grosso impatto. Utilizzando uno strumento esterno basato su \gls{npm}\ped{G} è possibile automatizzare questo processo ad un bassissimo costo computazionale\cite{site:xml-js}.\\
 
-% Inserire conclusioni sulla fattura integrale
+\noindent Si conclude quindi che l'implementazione di una soluzione ibrida potrebbe portare miglioramenti prestazionali per quanto riguarda la consultazione di fatture elettroniche all'interno dei software dell'azienda. Questo approccio incrementale potrebbe inoltre permettere ai team di sviluppo di familiarizzare con la nuova tecnologia in maniera graduale, permettendone l'assorbimento all'interno dello stack aziendale senza subire un rallentamento eccessivo nella produzione.

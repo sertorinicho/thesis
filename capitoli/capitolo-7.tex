@@ -11,7 +11,7 @@ Prima di avviare questo progetto di tesi è stata effettuata una breve ricerca p
 Sono state individuate altre tesi dai temi simili che propongono il confronto all'interno di database ``da laboratorio'', e alcune ricerche condotte su larga scala da aziende.\\
 Vista la natura di questo progetto, legato ai prodotti software sviluppati da Ifin Sistemi, la prospettiva di effettuare una ricerca approfondita risultava comunque interessante.\\
 
-\noindent Le conclusioni raggiunte al termine dei due mesi di tirocinio non sono dissimili da quelle raggiunte da altre ricerche, come ad esempio quelle svolte da OnGres, quando queste sono state condotte senza lo scopo di pubblicizzare l'una o l'altra tecnologia.\\
+\noindent Le conclusioni raggiunte al termine dei due mesi di tirocinio non sono dissimili da quelle raggiunte da altre ricerche, come ad esempio quelle svolte da OnGres\cite{site:ongres}, quando queste sono state condotte senza lo scopo di pubblicizzare l'una o l'altra tecnologia.\\
 Come in molti altri ambiti, anche in questo caso il contesto di utilizzo di uno strumento ne determina efficacia ed efficienza.\\
 L'introduzione dei database NoSQL ha permesso di raggiungere risultati estremamente vantaggiosi in molti ambiti applicativi, ma questo non li rende uno strumento universale per potenziare qualsiasi database in ogni contesto.\\
 Tale fatto è valido per qualsiasi tecnologia, ma lo è ancora di più quando si parla di database NoSQL, data la grande varietà di soluzioni che questo gruppo comprende.\\
@@ -27,9 +27,67 @@ Allo stesso tempo, fare affidamento solo alle tecnologie già consolidate, con a
 Per quanto riguarda l'azienda per cui è stato condotto lo studio e il software su cui è stato basato, i risultati suggeriscono l'implementazione di una soluzione ibrida, che potrebbe migliorare il software, alleggerendo il carico di lavoro per i database tradizionali e permettendo di implementare nuove funzionalità.\\
 
 \noindent Non è tuttavia prevista, nell'immediato futuro, un'analisi più approfondita volta a provare quanto postulato con questa tesi, per rendere più realistica l'idea di una migrazione di database. Come già evidenziato dal dialogo avuto con i team dedicati allo sviluppo dei software analizzati, le soluzioni adottate fin'ora per potenziare i database in uso sono state al contempo dispendiose da implementare (a livello di tempo ed energia) e proficue nel modo in cui sono riuscite a tamponare i problemi di disponibilità a cui tali tecnologie sono andate incontro con l'aumentare del carico di lavoro imposto.\\
-Finchè i sistemi adottati continuano a funzionare stabilmente, non ha senso per l'azienda dedicare forza lavoro allo studio di nuove tecnologie, soprattutto in luce di un secondo fattore estremamente centrale: i prodotti dell'azienda non sono nuovi. Questo ha un peso per quel che riguarda la necessità di far ``collaborare'' tecnologie nuove con altre meno recenti, ma significa soprattutto che negli anni in cui LegalArchive e InvoiceChannel (i prodotti in questione) sono stati in commercio, il naturale ciclo di manutenzione e upgrade del software ha avuto corso, rendendoli dei progetti estremamente grandi e complessi, la cui migrazione richiederebbe probabilmente più energie di quelle che si andrebbero a risparmiare una volta terminata.\\
+Finchè i sistemi adottati continuano a funzionare stabilmente, non ha senso per l'azienda dedicare forza lavoro allo studio di nuove tecnologie, soprattutto in luce di un secondo fattore estremamente centrale: i prodotti dell'azienda non sono nuovi. Questo ha un peso per quel che riguarda la necessità di far ``collaborare'' tecnologie nuove con altre meno recenti, ma significa soprattutto che negli anni in cui \textit{LegalArchive} e \textit{InvoiceChannel} (i prodotti in questione) sono stati in commercio, il naturale ciclo di manutenzione e upgrade del software ha avuto corso, rendendoli dei progetti estremamente grandi e complessi, la cui migrazione richiederebbe probabilmente più energie di quelle che si andrebbero a risparmiare una volta terminata.\\
 
 \noindent Ciò che questa ricerca può aspirare ad essere è uno spunto per evidenziare quanto l'implementazione ibrida di soluzioni relazionali miste a quelle NoSQL possa essere proficua. La soluzione che viene proposta nella \autoref{sec:fattura-integrale} è un esempio valido di questa convivenza di tecnologie, e rappresenta un buon punto di partenza qualora l'azienda decidesse di percorrere questa strada.\\
+
+%**************************************************************
+\section{Raggiungimento degli obiettivi formativi}
+
+Il raggiungimento degli obiettivi è riassunto nella \autoref{tab:tracciamento}. Nonostante le leggere variazioni subite dal piano di lavoro, tutti gli obiettivi obbligatori sono stati raggiunti durante lo svolgimento del tirocinio. Per quanto riguarda l'obiettivo O07, legato alla stesura di documentazione riassuntiva sui risultati ottenuti dal confronto, questa è stata abbozzata e scritta nella sua interezza durante il periodo di stage, mentre la  versione più formale è costituita da questa tesi stessa.\\
+Anche l'unico obiettivo identificato come desiderabile è stato raggiunto, nello specifico durante lo studio delle tecnologie appartenenti all'ambito NoSQL.
+
+\begin{center}
+    
+    \renewcommand{\arraystretch}{1.5}
+    
+    \centering
+    \begin{longtable}{| C{2.5cm} | C{4cm} |}
+        
+        \hline
+        
+        \rowcolor{mongogreen}
+        \textbf{Requisito} &  \textbf{Stato} \\
+        
+        \hline
+        
+        \texttt{O01} & Raggiunto \\
+        
+        \hline 
+        
+        \texttt{O02} & Raggiunto \\
+        
+        \hline 
+        
+        \texttt{O03} & Raggiunto \\
+        
+        \hline 
+        
+        \texttt{O04} & Raggiunto \\
+        
+        \hline
+        
+        \texttt{O05} & Raggiunto  \\
+        
+        \hline 
+        
+        \texttt{O06} & Raggiunto \\
+        
+        \hline 
+        
+        \texttt{O07} & Raggiunto  \\
+        
+        \hline 
+        
+        \texttt{D01} & Raggiunto  \\
+        
+        \hline 
+        
+        \caption{Tracciamento dei requisiti}\label{tab:tracciamento}
+    \end{longtable}
+    
+    
+\end{center}
 
 
 %**************************************************************
