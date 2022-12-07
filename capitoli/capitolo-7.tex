@@ -34,52 +34,55 @@ Finchè i sistemi adottati continuano a funzionare stabilmente, non ha senso per
 %**************************************************************
 \section{Raggiungimento degli obiettivi formativi}
 
-Il raggiungimento degli obiettivi è riassunto nella \autoref{tab:tracciamento}. Nonostante le leggere variazioni subite dal piano di lavoro, tutti gli obiettivi obbligatori sono stati raggiunti durante lo svolgimento del tirocinio. Per quanto riguarda l'obiettivo O07, legato alla stesura di documentazione riassuntiva sui risultati ottenuti dal confronto, questa è stata abbozzata e scritta nella sua interezza durante il periodo di stage, mentre la  versione più formale è costituita da questa tesi stessa.\\
+Il raggiungimento degli obiettivi è riassunto nella \autoref{tab:tracciamento}. Nonostante le leggere variazioni subite dal piano di lavoro, tutti gli obiettivi obbligatori sono stati quasi tutti raggiunti durante lo svolgimento del tirocinio.\\
+L'unica eccezione viene fatta per l'obiettivo \texttt{O06}, a causa di leggere variazioni nelle attività svolte. Mentre l'obiettivo prevedeva la creazione di una suite di test di carico, a causa dei tempi ristretti e delle reali necessità riscontrate durante lo svolgimento dello stage si è ritenuto più consono limitarsi alla creazione di singole query che fossero in grado di mettere meglio a confronto i database analizzati.\\
+Per quanto riguarda l'obiettivo \texttt{O07}, legato alla stesura di documentazione riassuntiva sui risultati ottenuti dal confronto, questa è stata abbozzata e scritta nella sua interezza durante il periodo di stage, mentre la  versione più formale è costituita da questa tesi stessa.\\
 Anche l'unico obiettivo identificato come desiderabile è stato raggiunto, nello specifico durante lo studio delle tecnologie appartenenti all'ambito NoSQL.
 
+\begin{table}
 \begin{center}
     
     \renewcommand{\arraystretch}{1.5}
     
     \centering
-    \begin{longtable}{| C{2.5cm} | C{4cm} |}
+    \begin{longtable}{| C{2cm} | C{7cm} | C{3.5cm} |}
         
         \hline
         
         \rowcolor{mongogreen}
-        \textbf{Requisito} &  \textbf{Stato} \\
+        \textbf{Obiettivo} & \textbf{Descrizione} & \textbf{Stato} \\
         
         \hline
         
-        \texttt{O01} & Raggiunto \\
+        \texttt{O01} & Comprendere lo stack di sviluppo aziendale & Raggiunto \\
         
         \hline 
         
-        \texttt{O02} & Raggiunto \\
+        \texttt{O02} & Colmare eventuali lacune sullo stack Java EE & Raggiunto \\
         
         \hline 
         
-        \texttt{O03} & Raggiunto \\
+        \texttt{O03} & Colmare eventuali lacune in ambito NoSQL & Raggiunto \\
         
         \hline 
         
-        \texttt{O04} & Raggiunto \\
+        \texttt{O04} & Identificare i KPI aziendali & Raggiunto \\
         
         \hline
         
-        \texttt{O05} & Raggiunto  \\
+        \texttt{O05} & Ottenere una visualizzazione chiara del panorama NoSQL & Raggiunto  \\
         
         \hline 
         
-        \texttt{O06} & Raggiunto \\
+        \texttt{O06} & Suite di test di carico e verifica performance e KPI & Parzialmente raggiunto \\
         
         \hline 
         
-        \texttt{O07} & Raggiunto  \\
+        \texttt{O07} & Esecuzione test e stesura documentazione riassuntiva & Raggiunto  \\
         
         \hline 
         
-        \texttt{D01} & Raggiunto  \\
+        \texttt{D01} & dentificazione librerie Java di connessione & Raggiunto  \\
         
         \hline 
         
@@ -88,7 +91,87 @@ Anche l'unico obiettivo identificato come desiderabile è stato raggiunto, nello
     
     
 \end{center}
+\end{table}
 
+%**************************************************************
+\section{Valutazione retrospettiva delle attività svolte}
+In \autoref{tab:retrospettiva} vengono riportare le attività effettivamente svolte durante lo stage e le ore impiegate. Come già detto nel \autoref{cap:descrizione-stage}, questa retrospettiva si discosta leggermente dalla pianificazione effettuata. Si è infatti rivelato necessario investire 40 ore nello studio del database di \textit{InvoiceChannel}, per poter costruire i due database di test su cui eseguire le query.\\
+Questo quantitativo di ore, spese nella sesta settimana, non ha aumentato il monte ore previsto per il tirocinio, poichè sono state sottratte al tempo necessario per creare le query, che hanno richiesto meno tempo del previsto (attività inizialmente prevista per la sesta e la settima settimana).
+Gli obiettivi delle ultime due settimane, inoltre, sono stati corretti in ``creazione, codifica e revisione delle query'', e non più dei test. Questo rispecchia il lavoro svolto, che non ha compreso la creazione di test di carico elaborati, ma si è limitato appunto all'elaborazione di query specifiche per PostgreSQL e MongoDB.
+
+
+\begin{table}
+\begin{center}
+
+        \renewcommand{\arraystretch}{1.5}
+    
+        \centering
+        \begin{longtable}{| C{2.5cm} | C{2cm} | L{7.2cm} | }
+            
+            \hline
+            
+            \rowcolor{mongogreen}
+            \textbf{Durata in ore} & \textbf{Settimana} & \textbf{Descrizione} \\
+            
+            \hline
+            
+            40 & 1 &
+            \begin{itemize}[leftmargin=*]
+                \item Formazione sullo stack operativo e di sviluppo aziendale;
+                \item Formazione stack \textit{Java EE}
+            \end{itemize} \\
+            
+            \hline
+            
+            80 & 2, 3 &
+            \begin{itemize}[leftmargin=*]
+                \item Studio NoSQL in generale;
+                \item Verifica soluzioni NoSQL specifiche;
+                \item Identificazione di soluzioni NoSQL enterprise da analizzare e \gls{KPI}\ped{G} aziendali. 
+            \end{itemize}  \\
+            
+            \hline
+        
+            80 & 4, 5 &
+            \begin{itemize}[leftmargin=*]
+                \item Analisi di dettaglio delle soluzioni precedentemente identificate. 
+            \end{itemize}  \\
+             
+            \hline
+            
+            40 & 6 &
+            \begin{itemize}[leftmargin=*]
+                \item Studio del database aziendale e preparazione di una sua versione semplificata.
+            \end{itemize}  \\
+
+            \hline
+
+            40 & 7 &
+            \begin{itemize}[leftmargin=*]
+                \item Creazione e codifica di query per lo studio delle performance di carico e aderenza ai \gls{KPI}\ped{G} individuati.
+            \end{itemize}  \\
+            
+            \hline
+            
+            40 & 8 &
+            \begin{itemize}[leftmargin=*]
+                \item Revisione query e stesura documentazione finale.
+            \end{itemize} \\
+            
+            \hline
+            
+            \rowcolor{mongogreen}
+            \multicolumn{2}{ | c | }{\textbf{Totale ore: }} &   \multicolumn{1}{  c | }{\textbf{320}}\\
+            
+            \hline
+        
+            
+            \caption{Attività svolte}\label{tab:retrospettiva}
+        \end{longtable}
+        
+    
+\end{center}
+\end{table}
 
 %**************************************************************
 \section{Conoscenze acquisite e valutazione personale}

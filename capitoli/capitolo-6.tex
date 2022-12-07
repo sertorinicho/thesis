@@ -74,6 +74,7 @@ La prima query, esposta in \autoref{fig:query1}, è piuttosto semplice. Effettua
 \noindent Facciamo notare che PostgreSQL crea automaticamente gli indici sulle primary keys, quindi sono stati indicizzati anche i campi ID dei documenti in MongoDB. Questo è stato fatto per effettuare un confronto alla pari, ma è anche dovuto al fatto che intorno ai 200.000 documenti MongoDB non permette più di effettuare operazioni di \texttt{sort()} se non viene integrato l'uso di indici.\\
 \noindent Nella \autoref{tab:query1} possiamo vedere i risultati del confronto sui tempi ottenuti ripetendo la stessa query su database popolati con un numero sempre maggiore di elementi.\\
 
+\begin{table}
 \begin{center}
     \renewcommand{\arraystretch}{1.5}
     
@@ -104,6 +105,7 @@ La prima query, esposta in \autoref{fig:query1}, è piuttosto semplice. Effettua
         \label{tab:query1}
     \end{longtable}
 \end{center}
+\end{table}
 
 \noindent Dal grafico in \autoref{fig:query1.2} si evince quanto già scoperto durante lo studio delle tecnologie coinvolte nel confronto. L'utilizzo di documenti incorporati (in questo caso i dati dell'operation che riguarda l'invoice sono contenuti nel documento dell'invoice stessa) permette a MongoDB di evitare le operazioni di \texttt{join}, che rallentano di molto l'esecuzione delle query in PostgreSQL.\\
 
@@ -228,6 +230,7 @@ La sesta query, esposta in \autoref{fig:query6}, è simile alla precedente. In q
 \noindent La query su PostgreSQL impiega dai 2 ai 5 minuti per essere portata a termine su un database contenente 100.000 elementi.\\
 Osservando la \autoref{tab:query6}, presa direttamente da pgAdmin, possiamo notare come quasi tutto questo tempo sia utilizzato per effettuare uno scan della tabella \texttt{OPERATIONS}, che viene poi aggiornata.\\
 
+\begin{table}
 \begin{center} 
     \renewcommand{\arraystretch}{1.5}
     
@@ -249,6 +252,7 @@ Osservando la \autoref{tab:query6}, presa direttamente da pgAdmin, possiamo nota
         \label{tab:query6}
     \end{longtable}
 \end{center}
+\end{table}
 
 \noindent MongoDB impiega soltanto 65 millisecondi per effettuare tutte le operazioni.\\
 Ripetendo la query su database più ampi il risultato non cambia. Per 250.000 elementi PostgreSQL impiega più di trenta minuti, MongoDB si mantiene sotto i 200 millisecondi. Il tempo raddoppia quando all'interno del database sono contenuti 500.000 elementi. Per questa quantità di dati, PostgreSQL non restituisce un risultato in tempi utili.\\
