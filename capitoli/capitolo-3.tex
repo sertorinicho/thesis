@@ -13,7 +13,7 @@ Questo capitolo è dedicato all'introduzione delle nozioni emerse dalla fase di 
 \section{Cosa significa NoSQL}
 Quando si parla di database NoSQL si intendono tutte quelle tecnologie di persistenza di dati che non prevedono strettamente l'utilizzo del paradigma \gls{SQL}\ped{G} \cite{site:mongoarticlenosql}. L'acronimo significa infatti Not-only Structured Query language.\\
 Tuttavia, mentre le tecnologie classiche che rientrano sotto l'ombrello dei RDBMS (\textit{relational database management systems}) sono in qualche modo uniformate dalla ``lingua franca'' che condividono (\gls{SQL}\ped{G}), le implementazioni che ricadono nel paradigma NoSQL sono estremamente varie nell'effettivo modo in cui gestiscono i dati, e di conseguenza nei linguaggi che adottano.\\
-Questo può rendere il processo di selezione più complesso, ma fornisce anche un'ampia gamma di opzioni che, se scelte con cognizione di causa, possono portare a soluzioni estremamente specializzate ed efficaci.\\
+Questo può rendere il processo di selezione più complesso, ma fornisce anche un'ampia gamma di opzioni che possono portare a soluzioni estremamente specializzate ed efficaci.\\
 
 
 %**************************************************************
@@ -22,7 +22,7 @@ Vengono di seguito elencati i vari sottogruppi che possiamo individuare all'inte
 
 \subsection{Key-Value Store}
 Questa categoria di database rappresenta in realtà un modo per immagazzinare informazioni, basato sulla strutturazione dei dati in coppie ``chiave-valore''.\\
-Tutte le operazioni effettuate su un DB di questo tipo si basano quindi sulla chiave per recuperare il suo valore associato. Nella sua forma più semplcie, un \textit{key-value} store funziona esattamente come un dizionario.\\
+Tutte le operazioni effettuate su un DB di questo tipo si basano quindi sulla chiave per recuperare il suo valore associato. Nella sua forma più semplcie, un \textit{key-value store} funziona esattamente come un dizionario.\\
 
 \noindent Come esempio abbiamo il caso di Redis \cite{site:udemyredis} (logo in \autoref{fig:redis}).\\
 Nasce inizialmente come database appartenente al paradigma \textit{key-value}, composto quindi da un set di chiavi a cui sono legati dei valori, contenuto per intero nella memoria RAM.\\
@@ -76,12 +76,12 @@ CouchDB (logo in \autoref{fig:mongocouch}) è piuttosto simile, sebbene sia un p
 \end{figure}
 
 \subsection{Graph Database}
-Esistono alcune categorie di database all'interno del panorama NoSQL che sono state sviluppate soddisfare necessità specifiche. Una di queste categorie è quella dei database basati sui grafi.\\
+Esistono alcune categorie di database all'interno del panorama NoSQL che sono state sviluppate per soddisfare necessità specifiche. Una di queste categorie è quella dei database basati sui grafi.\\
 Se nei RDBMS le relazioni sono sfruttate per collegare le tabelle, nel caso dei grafi le relazioni diventano vere e proprie entità, al pari dei nodi che esse collegano.\\
 Questo consente di recuperare i dati con richieste (query) più concise e leggibili, oltre che ridurre i tempi di attesa.\\
 Questo tipo di database funziona al meglio in situazioni dove le query si basano molto sulle relazioni tra i dati, dove un database relazionale dovrebbe operare molte operazioni di \textit{join} che aumentano notevolmente il tempo di elaborazione.\\
 
-\noindent Un esempio di database in questa categoria è Neo4j\cite{site:udemyneo4j}.\\
+\noindent Un esempio di database in questa categoria è Neo4j \cite{site:udemyneo4j}.\\
 Come i database relazionali, Neo4j (logo in \autoref{fig:neo}) è \textit{ACID compliant}, ovvero rispetta i parametri di atomicità, consistenza, isolazione e durabilità. Non è tuttavia un \gls{database distribuito}\ped{G} e soffre quindi quando si parla di scalabilità.\\
 Sfrutta un linguaggio molto intuitivo e simile a \gls{SQL}\ped{G} per le query, chiamato \textit{cypher}.\\
 
@@ -98,7 +98,7 @@ Sfrutta un linguaggio molto intuitivo e simile a \gls{SQL}\ped{G} per le query, 
 \subsection{Search Engine}
 Un'altra soluzione interessante, ma altrettanto specifica, è quella dei cosiddetti \textit{full-text search engine}. Questo tipo di database è piuttosto simile, in superficie, a quelli basati sui documenti, con la differenza che il \textit{search engine} analizza i contenuti del database e ne fornisce un indice. In questo modo la ricerca di dati, che ovviamente sfrutta tale indice, risulta estremamente rapida anche su dataset molto grandi, con la possibilità di implementare anche vari filtri per migliorare la \textit{user experience}.\\
 
-\noindent L'esempio più classico di implementazione di questo tipo di tecnologia è Elasticsearch (logo in \autoref{fig:elastic}), che è inizialmente nato come \textit{search engine} e si è successivamente espanso per fornire le funzionalità classiche di un normale database\cite{site:udemyelasticsearch}.
+\noindent L'esempio più classico di implementazione di questo tipo di tecnologia è Elasticsearch (logo in \autoref{fig:elastic}), che è inizialmente nato come \textit{search engine} e si è successivamente espanso per fornire le funzionalità classiche di un normale database \cite{site:udemyelasticsearch}.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -112,7 +112,7 @@ Un'altra soluzione interessante, ma altrettanto specifica, è quella dei cosidde
 \section{CAP Theorem e semplicità di integrazione}
 \label{sec:cap-theorem-integrazione}
 
-Nel tentativo di categorizzare i database distribuiti, siano essi relazionali o meno, si sfrutta spesso il cosiddetto \textit{CAP Theorem}\cite{site:captheorem}, secondo cui un database distribuito può fornire soltanto due delle seguenti tre garanzie:
+Nel tentativo di categorizzare i database distribuiti, siano essi relazionali o meno, si sfrutta spesso il cosiddetto \textit{CAP Theorem} \cite{site:captheorem}, secondo cui un database distribuito può fornire soltanto due delle seguenti tre garanzie:
 \begin{itemize}
     \item \textbf{Consistency}: i dati sono sempre coerenti all'interno dei vari nodi distribuiti;
     \item \textbf{Availability}: i dati sono sempre disponibili in ogni momento;
@@ -141,35 +141,35 @@ A volte alcune soluzioni sembrano più funzionali al proprio caso d'uso, ma non 
 A tale scopo si elencano i software individuati e le loro opzioni di integrazione, tenendo a mente che lo stack aziendale si basa sull'utilizzo di \textit{Java} come linguaggio di programmazione.
 
 \subsubsection{Redis Stack}
-Per quanto riguarda Redis, Redis Stack e tutti i moduli ad esso collegati, il modo più semplice e ``ad alto livello'' per interagire con il database è sfruttare Redis OM, costruito sulla base di \textit{Spring Data Redis}. Si tratta di un modulo del progetto \textit{Spring Data}, che racchiude librerie specifiche per interagire con diversi database usando il framework \textit{Spring}\cite{site:udemyredis}.
+Per quanto riguarda Redis, Redis Stack e tutti i moduli ad esso collegati, il modo più semplice e ``ad alto livello'' per interagire con il database è sfruttare Redis OM, costruito sulla base di \textit{Spring Data Redis}. Si tratta di un modulo del progetto \textit{Spring Data}, che racchiude librerie specifiche per interagire con diversi database usando il framework \textit{Spring} \cite{site:udemyredis}.
 
 \subsubsection{Cassandra}
 Cassandra può essere utilizzato in modo facile tramite Astra DB, un \textit{multi-cloud \gls{DBaaS}}\ped{G} costruito su Cassandra.\\
-Per interagire con Astra si possono sfruttare le soluzioni più disparate, dall'utilizzo delle \gls{rest API}\ped{G} all'implementazione di driver specifici per \textit{Java} che ne facilitano l'utilizzo\cite{site:udemycassandra}.
+Per interagire con Astra si possono sfruttare le soluzioni più disparate, dall'utilizzo delle \gls{rest API}\ped{G} all'implementazione di driver specifici per \textit{Java} che ne facilitano l'utilizzo \cite{site:udemycassandra}.
 
 \subsubsection{MongoDB}
-MongoDB è una delle implementazioni NoSQL più diffuse e versatili. Si può utilizzare Atlas come ``\textit{MongoDB as a Service}'', e anche in questo caso viene fornita la \gls{rest API}\ped{G} per effettuare operazioni sui dati. MongoDB fornisce driver per l'integrazione con \textit{Java}, ma si può direttamente usare \textit{Spring Data}, espressamente creato per fornire un modello familiare per datastores basato su \textit{Spring}\cite{site:udemymongodb}.
+MongoDB è una delle implementazioni NoSQL più diffuse e versatili. Si può utilizzare Atlas come ``\textit{MongoDB as a Service}'', e anche in questo caso viene fornita la \gls{rest API}\ped{G} per effettuare operazioni sui dati. MongoDB fornisce driver per l'integrazione con \textit{Java}, ma si può direttamente usare \textit{Spring Data}, espressamente creato per fornire un modello familiare per datastores basato su \textit{Spring} \cite{site:udemymongodb}.
 
 \subsubsection{CouchDB}
 CouchDB non possiede librerie specifiche per l'integrazione e la comunicazione con applicativi scritti in \textit{Java}. Quelle che esistono spesso non sono ufficiali e quindi utilizzabili ``a proprio rischio e pericolo''. Risulta possibile implementare la comunicazione direttamente tramite \gls{rest API}\ped{G}, ma è dispendioso.\\
-Esiste tuttavia una versione di CouchDB sviluppata da IBM, denominata \textit{Cloudant}, che propone il servizio cloud e l'integrazione con \textit{Java}\cite{site:udemycouchdb}.
+Esiste tuttavia una versione di CouchDB sviluppata da IBM, denominata \textit{Cloudant}, che propone il servizio cloud e l'integrazione con \textit{Java} \cite{site:udemycouchdb}.
 
 \subsubsection{Neo4j}
-Anche Neo4j ha recentemente fornito una propria piattaforma, lanciando il progetto Aura per fornire \gls{DBaaS}\ped{G}, con supporto per integrazione con \textit{Spring Boot} e \textit{Spring Data}\cite{site:udemyneo4j}.
+Anche Neo4j ha recentemente fornito una propria piattaforma, lanciando il progetto Aura per fornire \gls{DBaaS}\ped{G}, con supporto per integrazione con \textit{Spring Boot} e \textit{Spring Data} \cite{site:udemyneo4j}.
 
 \subsubsection{Elasticsearch}
 Elasticsearch sfrutta Elastic Cloud come soluzione distribuita.\\
-Possiede varie funzionalità interessanti tra cui la possibilità di migrare i propri dati da un cloud all'altro, a prescindere dal provider\cite{site:udemyelasticsearch}.
+Possiede varie funzionalità interessanti tra cui la possibilità di migrare i propri dati da un cloud all'altro, a prescindere dal provider \cite{site:udemyelasticsearch}.
 
 
 %**************************************************************
-\section{Panoramica sui prodotti Ifin e sulle soluzioni RDBMS adottate in azienda}
+\section{Panoramica sui prodotti di Ifin Sistemi}
 
 La seguente sezione è il risultato del dialogo avuto con i team leader di tre diversi gruppi di sviluppo interni all'azienda, necessario per comprendere più nel dettaglio il funzionamento dei software che essa produce e mantiene.\\
 Nello specifico, si è ritenuto importante capire quali fossero le tecnologie coinvolte all'interno di questi prodotti, come essi comunichino con i database che sono al centro delle dissertazioni presenti in questa tesi, ed infine quali sono i colli di bottiglia che essi affrontano, per cominciare a farsi un'idea sui punti critici che una migrazione verso un sistema diverso potrebbe migliorare o risolvere.\\
 
 \subsection{LegalArchive}
-Il primo prodotto analizzato è \textit{LegalArchive} (logo in \autoref{fig:legal}), un applicativo che si occupa di archiviazione di documenti con importanza legale\cite{site:legalarchive}.\\
+Il primo prodotto analizzato è \textit{LegalArchive} (logo in \autoref{fig:legal}), un applicativo che si occupa di archiviazione di documenti con importanza legale \cite{site:legalarchive}.\\
 Questo software si occupa di prendere in carico i documenti che un'ente desidera conservare, e tradurli in informazioni che possano essere inserite in un database.\\
 Questo è soltanto uno dei suoi scopi, ma è quello che più da vicino riguarda gli argomenti affrontati in tirocinio.\\
 Per comunicare con i DB, che in questo caso sono distribuzioni enterprise di \textit{Microsoft SQL Server} e \textit{Oracle Server}, \textit{LegalArchive} si serve di uno stack di strumenti che semplificano tale dialogo.\\
@@ -195,7 +195,7 @@ Dalle informazioni raccolte, emerge quindi come i problemi principali per questo
 \end{figure}
 
 \subsection{InvoiceChannel}
-\textit{InvoiceChannel} (logo in \autoref{fig:invoice}) è il secondo prodotto per importanza all'interno dell'azienda, ed è strettamente legato a \textit{LegalArchive}\cite{site:invoicechannel}.\\
+\textit{InvoiceChannel} (logo in \autoref{fig:invoice}) è il secondo prodotto per importanza all'interno dell'azienda, ed è strettamente legato a \textit{LegalArchive} \cite{site:invoicechannel}.\\
 Si tratta di un software che fa da ponte tra le aziende ed il Sistema di Interscambio (SdI), un servizio dell'Agenzia delle Entrate che gestisce la fatturazione elettronica.\\
 Si presenta come una piattaforma tramite cui inserire dati e documenti perché questi vengano inoltrati al SdI ed elaborati come necessario. All'interno di \textit{InvoiceChannel} è presente anche l'opzione di conservare le fatture inserite assieme con eventuali allegati all'interno di \textit{LegalArchive}.\\
 Dal lato tecnico, anche per quanto riguarda \textit{InvoiceChannel} vengono sfruttati sia database Oracle che Microsoft.\\
@@ -207,7 +207,7 @@ Anche l'ottimizzazione dei tempi di attesa per determinate operazioni \textit{ti
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=5em]{immagini/tecnologies-logos/logo-invoice-channel.png}
-\caption{Logo di InvoiceChannel}
+\caption{Logo di \textit{InvoiceChannel}}
 \label{fig:invoice}
 \end{center}
 \end{figure}
@@ -219,7 +219,7 @@ In questo modo sarà possibile determinare, dati alla mano, quali possono essere
 
 
 %**************************************************************
-\section{Conclusione della fase di indagine}\label{sec:fineindagine}
+\section{Conclusione della fase di indagine}\label{section:fineindagine}
 
 Si evince, dall'analisi eseguita e dai dialoghi avuti con i vari team leader, che lo stack tecnologico utilizzato in Ifin è ben consolidato e strettamente legato ai processi. Per questo motivo, l'idea di sostituire parti di esso rappresenta una sfida non indifferente e necessita di una valutazione attenta di vantaggi e svantaggi, poiché apportare modifiche di questa taglia e importanza richiederebbe uno sforzo immane.\\
 Per quanto riguarda i problemi che le tecnologie in questione sono costrette ad affrontare quotidianamente, emerge una comune preoccupazione per scalabilità dei sistemi e performance delle operazioni in rapidità ed affidabilità.\\

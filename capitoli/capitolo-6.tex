@@ -120,7 +120,7 @@ La prima query, esposta in \autoref{fig:query1}, è piuttosto semplice. Effettua
 \noindent Possiamo notare come la differenza sia ancora più evidente se cerchiamo gli stessi dati applicando una condizione di ricerca.\\
 
 %--------------------------------------------------------------
-
+\newpage
 \subsection{Query 2}
 Con la seconda query, esposta in \autoref{fig:query2}, cerchiamo tutte le invoice e le operations ad esse associate, questa volta limitandoci alle sole fatture che soddisfano una specifica condizione sul proprio numero identificativo.\\
 
@@ -154,8 +154,7 @@ Inoltre, grazie agli strumenti messi a disposizione da PostgreSQL, possiamo anch
 \end{center}
 \end{figure}
 
-\noindent Quasi il 70\% del tempo è dedicato all'operazione di \texttt{join}, di cui invece MongoDB non si deve preoccupare (in questo caso).\\
-La sola operazione di Index Scan occupa PostgreSQL per circa 90 ms, un tempo che sarebbe estremamente competitivo.\\
+\noindent Quasi il 70\% del tempo è dedicato all'operazione di \texttt{join}, di cui invece MongoDB non si deve preoccupare (in questo caso). La sola operazione di Index Scan impiega circa 90 ms, un tempo che sarebbe estremamente competitivo.\\
 
 %--------------------------------------------------------------
 
@@ -258,9 +257,9 @@ Osservando la \autoref{tab:query6}, presa direttamente da pgAdmin, possiamo nota
 Ripetendo la query su database più ampi il risultato non cambia. Per 250.000 elementi PostgreSQL impiega più di trenta minuti, MongoDB si mantiene sotto i 200 millisecondi. Il tempo raddoppia quando all'interno del database sono contenuti 500.000 elementi. Per questa quantità di dati, PostgreSQL non restituisce un risultato in tempi utili.\\
 
 %--------------------------------------------------------------
-
+%\newpage
 \subsection{Query 7}
-La query riportata in \autoref{fig:query7} rappresenta un altro caso d'uso importante.
+La query riportata in \autoref{fig:query7} rappresenta un altro caso d'uso importante.\\
 
 \begin{figure}[htbp]
 \begin{center}
@@ -284,7 +283,10 @@ MongoDB impiega tra i 5 e i 6 secondi per la stessa operazione, con la stessa qu
 \end{center}
 \end{figure}
 
-\noindent Con questa query si conclude la fase di confronto diretto tra i tempi di esecuzione delle operazioni sui due database. Vale la pena evidenziare un fattore che sicuramente emerge leggendo le query presentate: la complessità del linguaggio utilizzato per le query di MongoDB non è trascurabile e, rispetto all'immediatezza di \gls{SQL}\ped{G}, risulta piuttosto impegnativo da imparare, utilizzare e comprendere.
+%--------------------------------------------------------------
+
+\subsection{Considerazioni sulla scrittura delle query}
+Dopo aver concluso la precedente fase di confronto delle prestazioni, vale la pena evidenziare un fattore che sicuramente emerge leggendo le query presentate: la complessità del linguaggio utilizzato per le query di MongoDB non è trascurabile e, rispetto all'immediatezza di \gls{SQL}\ped{G}, risulta piuttosto impegnativo da imparare, utilizzare e comprendere.\\
 
 %**************************************************************
 \section{Operazione di inserimento della fattura integrale}

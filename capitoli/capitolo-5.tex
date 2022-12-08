@@ -3,7 +3,7 @@
 % !TEX root = ../tesi.tex
 
 %**************************************************************
-\chapter{Progettazione dei database per il confronto tra tecnologie}
+\chapter{Progettazione}
 \label{cap:progettazione}
 %**************************************************************
 
@@ -233,7 +233,7 @@ Per risolvere questo problema si usa il pattern degli attributi. L'idea è di ra
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[height=15em]{immagini/attribute-pattern.png}
-\caption{Esempio di utilizzo dell'attribute pattern}
+\caption{Esempio di utilizzo dell'attribute pattern \cite{site:mongoDataModeling}}
 \label{fig:attributepattern}
 \end{center}
 \end{figure}
@@ -307,7 +307,7 @@ Ovviamente si possono applicare più pattern contemporaneamente, in base alle op
 Ci saranno quindi una serie di campi di base condivisi tra gli oggetti e altri campi specifici, a volte contenuti in subdocuments.\\
 
 \subsubsection{Riepilogo}
-È chiaro come in base al caso d'uso, l'utilizzo di un pattern può migliorare l'architettura che sta alla base del database. Come evidenziato in \autoref{fig:tabpattern}, è sempre bene tenere a mente che pattern diversi sono utili in contesti diversi.
+È chiaro come in base al caso d'uso, l'utilizzo di un pattern può migliorare l'architettura che sta alla base del database. Come evidenziato in \autoref{fig:tabpattern}, è sempre bene tenere a mente che pattern diversi sono utili in contesti diversi \cite{site:mongoDataModeling}.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -317,7 +317,7 @@ Ci saranno quindi una serie di campi di base condivisi tra gli oggetti e altri c
 \end{center}
 \end{figure}
 
-\section{Migrazione del database relazionale nel modello NoSQL}
+\section{Migrazione da RDBMS a modello NoSQL}
 Il database relazionale costruito ed inserito all'interno di PostgreSQL è descritto dalla \autoref{fig:schema-er}. Per costruire l'architettura dei documenti che risiederanno all'interno del database NoSQL, vengono riassunti i contenuti di tale figura:\\
 \begin{itemize}
     \item \texttt{INVOICE} contiene dei dati relativi alla fattura inserita dall'utente;
