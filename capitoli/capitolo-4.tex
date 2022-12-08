@@ -3,7 +3,7 @@
 % !TEX root = ../tesi.tex
 
 %**************************************************************
-\chapter{Strumenti e tecnologie utilizzate}
+\chapter{Strumenti e tecnologie}
 \label{cap:strumenti}
 %**************************************************************
 
@@ -14,9 +14,9 @@ Per poter eseguire il confronto tra le prestazioni di database relazionali e NoS
 
 %**************************************************************
 \section{Docker}
-Per poter effettuare test consistenti, evitare problemi di installazione e compartimentalizzare l'ambiente di lavoro, si è deciso di sfruttare Docker\cite{site:docker}\cite{site:dockerdocs} (logo in \autoref{fig:docker}). Questo software permette di virtualizzare l'esecuzione di altri applicativi in ambienti chiusi e controllati, facilitando determinati processi di sviluppo. L'utilizzo di Docker in questo progetto lo rende più maneggevole e lineare.\\
+Per poter effettuare test consistenti, evitare problemi di installazione e compartimentalizzare l'ambiente di lavoro, si è deciso di sfruttare Docker \cite{site:docker}\cite{site:dockerdocs} (logo in \autoref{fig:docker}). Questo software permette di virtualizzare l'esecuzione di altri applicativi in ambienti chiusi e controllati, facilitando determinati processi di sviluppo. L'utilizzo di Docker in questo progetto lo rende più maneggevole e lineare.\\
 
-\noindent Per poter utilizzare Docker è necessario prima comprendere alcune parole chiave e ciò che esse rappresentano\cite{site:fireshipdocker}:
+\noindent Per poter utilizzare Docker è necessario prima comprendere alcune parole chiave e ciò che esse rappresentano \cite{site:fireshipdocker}:
 \begin{itemize}
     \item \textit{Dockerfile}
     \item \textit{Image}
@@ -47,7 +47,7 @@ Sebbene infatti sia possibile \textit{dockerizzare} moltissimi software, per gli
 Questo ha permesso di non investire troppo tempo nella preparazione degli strumenti e di concentrare le risorse disponibili nell'effettivo confronto tra database.\\
 
 \noindent Per tutti questi motivi si è quindi scelto di usare PostgreSQL (logo in \autoref{fig:postgresql}) come database relazionale da portare a confronto con MongoDB.\\
-PostreSQL è un database relazionale \textit{open source} molto robusto che si presta bene per rappresentare le prestazioni di un generico database di questa categoria\cite{site:postgres}. Esso è inoltre presente nell'hub di docker con un'immagine ufficiale, ed è quindi facile da far funzionare all'interno di un container a differenza di altri prodotti simili.\\
+PostreSQL è un database relazionale \textit{open source} molto robusto che si presta bene per rappresentare le prestazioni di un generico database di questa categoria \cite{site:postgres}. Esso è inoltre presente nell'hub di docker con un'immagine ufficiale, ed è quindi facile da far funzionare all'interno di un container a differenza di altri prodotti simili.\\
 Sebbene PostgreSQL non sia utilizzato massivamente all'interno dell'azienda, risulta comunque molto simile alle sue controparti non open source, \textit{MSSQL} e \textit{Oracle Server}, che sono invece largamente usate all'interno di Ifin e sarebbero oggetto di una potenziale migrazione qualora i risultati di questa tesi si rivelassero convincenti.\\
 
 \noindent Vale la pena di evidenziare che, a differenza delle tecnologie che ricadono sotto la sigla NoSQL, quelle legate ai database relazionali sono molto più simili tra loro, poichè condividono appunto il paradigma relazionale che sta alla base di tutte le variazioni esistenti proposte da aziende diverse in contesti diversi.\\

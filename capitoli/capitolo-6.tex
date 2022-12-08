@@ -16,7 +16,7 @@ Scegliendo lo strumento giusto, si possono così ottenere dati realistici in qua
 Sebbene inizialmente i dati siano stati generati tramite siti online che permettono di esportare fino a un migliaio di tuple, è presto diventato chiaro come questo avrebbe rallentato di molto il processo di popolamento, rendendolo anche più complesso.\\
 
 \noindent Si è quindi deciso di ricorrere ad uno strumento diverso, disponibile come pacchetto di \textit{Node.js} e installabile tramite \gls{npm}\ped{G} (\textit{node package manager}) in modo da poter essere utilizzato da linea di comando.\\
-Questo strumento, \textit{datamaker}\cite{site:datamaker}, è in grado di generare un numero arbitrario di records basandosi su template forniti dall'utente. Senza contare che è molto più rapido dei sistemi online.\\
+Questo strumento, \textit{datamaker} \cite{site:datamaker}, è in grado di generare un numero arbitrario di records basandosi su template forniti dall'utente. Senza contare che è molto più rapido dei sistemi online.\\
 Grazie a \textit{datamaker} è stato possibile generare dei dati fittizzi secondo specifiche personalizzate, in quantità elevate.\\
 Questo sistema garantisce anche un buon grado di consistenza, poiché rimane la traccia dello schema utilizzato in forma di template, cosa che invece andava spesso persa nei processi online. Anche grazie a questo è stato possibile generare dati affidabili su cui condurre i test, variando la quantità di dati presente in un file di import senza alterare in alcun modo lo schema che definisce come questi dati vengono costruiti.\\
 
@@ -39,18 +39,18 @@ Il tempo impiegato, tuttavia, può essere fuorviante. La notifica che per esempi
 Per eseguire un confronto più preciso è necessario capire come estrapolare i dati che cerchiamo in entrambe le basi di dati.
 
 \subsection{Estrapolare i tempi di esecuzione in PostgreSQL usando pgAdmin}
-PostgreSQL, come molti database relazionali e non, mette a disposizione il metodo \texttt{EXPLAIN}\cite{site:postgresdocs}. Quando questo viene utilizzato in testa ad una query, il risultato che si ottiene è una serie di informazioni riguardanti la sua esecuzione. Tra i vari parametri di questo metodo, quelli più interessanti per questo caso d'uso sono \texttt{ANALYZE} e \texttt{TIMING}, che possono essere specificati per ottenere informazioni specifiche riguardanti il tempo di esecuzione delle varie sezioni di query.\\
+PostgreSQL, come molti database relazionali e non, mette a disposizione il metodo \texttt{EXPLAIN} \cite{site:postgresdocs}. Quando questo viene utilizzato in testa ad una query, il risultato che si ottiene è una serie di informazioni riguardanti la sua esecuzione. Tra i vari parametri di questo metodo, quelli più interessanti per questo caso d'uso sono \texttt{ANALYZE} e \texttt{TIMING}, che possono essere specificati per ottenere informazioni specifiche riguardanti il tempo di esecuzione delle varie sezioni di query.\\
 Le query che vengono eseguite in questo modo vengono comunque portate a termine dal database, anche se il risultato di eventuali operazioni di \texttt{SELECT} non viene mostrato a schermo.\\
 Per impedire che questo accada è bene seguire la query con un'operazione di \textit{rollback}.\\
 
-\noindent pgAdmin permette di utilizzare il metodo \texttt{EXPLAIN} eseguendo la query che si vuole analizzare in uno spazio apposito dell'interfaccia\cite{site:pgAdmin}. Il risultato dell'operazione viene riportato in una tabella per semplificare la lettura, mentre vengono messi a disposizione anche una vista a grafo ed una tabella più complessa per il confronto tra tempi stimati dal metodo e tempi reali di esecuzione.\\
+\noindent pgAdmin permette di utilizzare il metodo \texttt{EXPLAIN} eseguendo la query che si vuole analizzare in uno spazio apposito dell'interfaccia \cite{site:pgAdmin}. Il risultato dell'operazione viene riportato in una tabella per semplificare la lettura, mentre vengono messi a disposizione anche una vista a grafo ed una tabella più complessa per il confronto tra tempi stimati dal metodo e tempi reali di esecuzione.\\
 Agli scopi di questa tesi, verranno prese in considerazione le informazioni riportate nella tabella principale, dove i tempi di completamento delle operazioni sono all'occorrenza separati nei vari pezzi che compongono la query.
 
 \subsection{Estrapolare i tempi di esecuzione in MongoDB usando Compass}
-All'interno di MongoDB si utilizza un linguaggio specifico per estrapolare informazioni dai database\cite{site:mongodb}. Se per i database relazionali si parla di Structured Query Language, in questo caso invece si usa \textit{MQL}, ovvero MongoDB Query Language, basato sulla sintassi di \textit{JavaScript}.\\
+All'interno di MongoDB si utilizza un linguaggio specifico per estrapolare informazioni dai database \cite{site:mongodb}. Se per i database relazionali si parla di Structured Query Language, in questo caso invece si usa \textit{MQL}, ovvero MongoDB Query Language, basato sulla sintassi di \textit{JavaScript}.\\
 
 \noindent Attraverso un'ampia selezione di metodi questo linguaggio offre la possibilità di effettuare tutte le \gls{operazioni CRUD}\ped{G}, oltre ad alcune altre funzionalità che possono tornare utili in varie situazioni, dalla gestione dei database alla misurazione delle prestazioni delle query.\\
-Utilizzando Compass, è poi possibile sfruttare una finestra apposita dell'interfaccia grafica per eseguire l'\textit{explain plan} di alcune query\cite{site:mongodbcompass}. Questa funzionalità è limitata tuttavia all'analisi del metodo \texttt{find()}, che corrisponde ad una select in \gls{SQL}\ped{G}.\\
+Utilizzando Compass, è poi possibile sfruttare una finestra apposita dell'interfaccia grafica per eseguire l'\textit{explain plan} di alcune query \cite{site:mongodbcompass}. Questa funzionalità è limitata tuttavia all'analisi del metodo \texttt{find()}, che corrisponde ad una select in \gls{SQL}\ped{G}.\\
 Per gli altri metodi è necessario approfondire il funzionamento del linguaggio di MongoDB per effettuare manualmente una ricerca sui tempi di esecuzione delle varie operazioni.\\
 Una volta determinato quali metodi concatenare per ottenere i risultati desiderati, è poi necessario eseguire tali comandi nella shell di MongoDB. Fortunatamente questa è accessibile sempre dall'interfaccia di Compass, rendendo il processo più lineare.\\
 
@@ -274,7 +274,7 @@ La query riportata in \autoref{fig:query7} rappresenta un altro caso d'uso impor
 
 \noindent Tutto questo è dimostrato dai dati statistici raccolti durante l'esecuzione delle query e riportati in \autoref{fig:query7.2}.\\
 Per PostgreSQL si tratta di una join piuttosto semplice, accoppiata ad un raggruppamento. Il tempo di esecuzione si aggira intorno ai 65 ms se le tabelle \texttt{INVOICE} e \texttt{ORGANIZATION} contengono 100.000 elementi ciascuna.\\
-MongoDB impiega tra i 5 e i 6 secondi per la stessa operazione, con la stessa quantità di dati.
+MongoDB impiega tra i 5 e i 6 secondi per la stessa operazione, con la stessa quantità di dati.\\
 
 \begin{figure}[htbp]
 \begin{center}
@@ -284,16 +284,14 @@ MongoDB impiega tra i 5 e i 6 secondi per la stessa operazione, con la stessa qu
 \end{center}
 \end{figure}
 
-\noindent Con questa query si conclude la fase di confronto diretto tra i tempi di esecuzione delle operazioni sui due database. Vale la pena di evidenziare un fattore che sicuramente salta all'occhio leggendo le precedenti pagine: la complessità del linguaggio utilizzato per le query di MongoDB non è trascurabile e rispetto all'immediatezza di \gls{SQL}\ped{G} risulta piuttosto impegnativo da imparare, utilizzare e comprendere.
+\noindent Con questa query si conclude la fase di confronto diretto tra i tempi di esecuzione delle operazioni sui due database. Vale la pena evidenziare un fattore che sicuramente emerge leggendo le query presentate: la complessità del linguaggio utilizzato per le query di MongoDB non è trascurabile e, rispetto all'immediatezza di \gls{SQL}\ped{G}, risulta piuttosto impegnativo da imparare, utilizzare e comprendere.
 
 %**************************************************************
-\section{Inserimento della fattura integrale}
+\section{Operazione di inserimento della fattura integrale}
 \label{sec:fattura-integrale}
 Uno dei casi d'uso di interesse per l'analisi condotta su \textit{InvoiceChannel} è quello che riguarda il salvataggio delle fatture.\\
-Sebbene parte dei dati che le compongono sia salvata nella tabella invoice, per velocizzare l'accesso alle informazioni più importanti la fattura viene anche salvata per intero in formato \texttt{XML}.\\
-
-\noindent Questo ovviamente non può essere fatto all'interno del database, principalmente perchè salvare una così grande quantità di dati all'interno di un unico campo non è desiderabile.\\
-All'estremo opposto c'è la possibilità di elaborare il contenuto del file per scomporlo in campi salvabili e indicizzabili, potendo così ricomporre la fattura quando necessario. Anche questa soluzione presenta delle criticità, perchè effettuare operazioni di questo tipo su ogni fattura introdotta nel sistema creerebbe probabilmente un collo di bottiglia, e anche ricomporla quando necessario potrebbe rivelarsi costoso o non pratico.\\
+Sebbene parte dei dati che le compongono sia salvata nella tabella invoice, allo scopo di velocizzare l'accesso alle informazioni più importanti, la fattura viene anche salvata per intero in formato \texttt{XML}. Questo ovviamente non può essere fatto all'interno del database, principalmente perchè salvare una così grande quantità di dati all'interno di un unico campo non è desiderabile.\\
+All'estremo opposto c'è la possibilità di elaborare il contenuto del file per scomporlo in campi archiviabili e indicizzabili, potendo così ricomporre la fattura quando necessario. Anche questa soluzione presenta delle criticità, perchè effettuare operazioni di questo tipo su ogni fattura introdotta nel sistema creerebbe probabilmente un collo di bottiglia, e anche ricomporla quando necessario potrebbe rivelarsi costoso o non pratico.\\
 
 \noindent La soluzione, come spesso succede, sta nel mezzo, e se ne trova un esempio all'interno dell'architettura di MongoDB, come di seguito riportato.\\
 Come è stato visto, MongoDB salva i propri documenti in formato \texttt{JSON}, introducendo degli ``effetti collaterali'' che tornano utili al nostro caso d'uso.\\
@@ -303,6 +301,6 @@ In questo modo la fattura sarebbe sempre a disposizione per intero all'interno d
 \noindent Tale trasformazione è bidirezionale, quindi così come si è passati dall'\texttt{XML} al \texttt{JSON} si può fare il contrario senza alcuna perdita di dati. Questo è importante perchè a livello legale \texttt{XML} rimane il formato ufficiale per le fatture elettroniche, quindi in caso di necessità si può ricostruire l'originale.\\
 
 \noindent Tutto questo ovviamente ha un costo, e sta a chi crea un sistema di questo tipo il compito di soppesare pro e contro. MongoDB supporta l'inserimento di file \texttt{BSON} fino a 16 MB e una fattura tradotta in formato \texttt{JSON} occupa circa 5 KB, quindi sebbene appaia come un file ``grande'' all'occhio umano, si tratta di una dimensione bel al di sotto dei limiti strutturali del database. Le prestazioni non sarebbero intaccate da questo tipo di soluzione, anche quando si considera l'archiviazione di centinaia di migliaia di fatture, specialmente se si fa uso di indici.\\
-Anche il costo della traduzione da \texttt{XML} a \texttt{JSON} va sicuramente rendicontato, ma dai test condotti non sembra avere un grosso impatto. Utilizzando uno strumento esterno basato su \gls{npm}\ped{G} è possibile automatizzare questo processo ad un bassissimo costo computazionale\cite{site:xml-js}.\\
+Anche il costo della traduzione da \texttt{XML} a \texttt{JSON} va sicuramente rendicontato, ma dai test condotti non sembra avere un grosso impatto. Utilizzando uno strumento esterno basato su \gls{npm}\ped{G} è possibile automatizzare questo processo ad un bassissimo costo computazionale \cite{site:xml-js}.\\
 
-\noindent Si conclude quindi che l'implementazione di una soluzione ibrida potrebbe portare miglioramenti prestazionali per quanto riguarda la consultazione di fatture elettroniche all'interno dei software dell'azienda. Questo approccio incrementale potrebbe inoltre permettere ai team di sviluppo di familiarizzare con la nuova tecnologia in maniera graduale, permettendone l'assorbimento all'interno dello stack aziendale senza subire un rallentamento eccessivo nella produzione.
+\noindent Si conclude quindi che l'implementazione di una soluzione ibrida potrebbe portare miglioramenti prestazionali per quanto riguarda la consultazione di fatture elettroniche all'interno dei software dell'azienda. Questo approccio incrementale potrebbe inoltre permettere ai team di sviluppo di familiarizzare con la nuova tecnologia in maniera graduale, permettendone l'assorbimento all'interno dello stack aziendale senza comportare un rallentamento eccessivo nella produzione.
