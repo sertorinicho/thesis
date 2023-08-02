@@ -1,2 +1,2 @@
-# thesis_template
-A simple Thesis template for the Bachelor Degree in Computer Science @Unipadova
+# thesis
+To read the thesis open the .pdf "tesi.pdf"
